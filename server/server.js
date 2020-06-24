@@ -6,10 +6,10 @@ const cookieParser = require('cookie-parser');
 
 const userController = require('./controllers/user');
 const verifyToken = require('./utils/verifyToken');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const env = require('dotenv').config();
 // ------
 // Routes
 // ------
@@ -38,6 +38,7 @@ app.get('*', (req, res) => {
 // Connect to DB
 // Then start server
 // -----------------
+
 
 mongoose.connect(process.env.DB, {
   useNewUrlParser: true,
