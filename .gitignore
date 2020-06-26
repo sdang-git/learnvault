@@ -110,3 +110,6 @@ nodemon.json
 
 # VS Code stuff
 .vscode/
+
+# Snapshots
+client/__tests__/__snapshots__/
