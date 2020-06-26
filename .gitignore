@@ -107,3 +107,6 @@ dist
 
 .DS_Store
 nodemon.json
+
+# VS Code stuff
+.vscode/
