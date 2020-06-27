@@ -17,10 +17,16 @@ describe('AllCollections tests', () => {
   }));
 
   mount(
-    <MemoryRouter initialEntries={['/1231']}>
+    <MemoryRouter initialEntries={['/junk']}>
       <Route exact path="/:userId" component={AllCollections} />
     </MemoryRouter>,
   );
+
+  const mockFetch = jest.fn(() => Promise.resolve({
+    status: 200,
+    json: () => ['5ef2b8c3d5973033a191aea2', '5ef3f1798a8800471b987bbe'],
+  }));
+  global.fetch = mockFetch;
 
   // const testData = [{
   //   contributors: [], links: ['https://www.freecodecamp.org/news/best-javascript-tutorial/', 'http://jsforcats.com/', 'https://javascript.info/', 'https://eloquentjavascript.net/', 'https://www.youtube.com/watch?v=Bv_5Zv5c-Ts', 'http://youmightnotneedjquery.com/'], likes: ['5ef2b8c3d5973033a191aea2'], tags: ['javascript', 'books'], _id: '5eee5bac1e986de551d57488', author: 'Nadya', title: 'Top Javascript Resources', description: 'Top javascript resources', hidden: false, category: 'javascript', text: 'https://www.freecodecamp.org/news/best-javascript-tutorial/, http://jsforcats.com/, https://javascript.info/, https://eloquentjavascript.net/, https://www.youtube.com/watch?v=Bv_5Zv5c-Ts, http://youmightnotneedjquery.com/', updated: '2020-06-20T18:55:40.020Z', __v: 1,

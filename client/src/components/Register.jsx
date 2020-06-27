@@ -124,7 +124,7 @@ const register = ({ setLoggedInUser }) => {
     });
 
     const data = await response.json();
-    console.log(data);
+    console.log('sendUserData', data);
 
     // Email already exists
     if (data.emailAlreadyExists) {
@@ -154,8 +154,9 @@ const register = ({ setLoggedInUser }) => {
   // -----------
 
   const submitForm = (e) => {
+    console.log('Invoking submitForm');
     e.preventDefault();
-
+    console.log('passed preventDefault');
     // Clear our all errors before validating
     clearErrorMessages();
 
@@ -165,10 +166,12 @@ const register = ({ setLoggedInUser }) => {
     validatePasswordFormat();
     validatePasswordMatch();
 
+    console.log('passed validation checks');
     // If any of the inputs don't pass validation stop submission
     if (containsErrors) return;
 
     // Send the data to the backend and do backend validation
+    console.log('submitForm invoking sendUserData');
     sendUserData();
   };
 
@@ -246,7 +249,7 @@ const register = ({ setLoggedInUser }) => {
           />
         </label>
 
-        <input type="submit" value="Register" onClick={submitForm} />
+        <input type="submit" className="submit-form" value="Register" onClick={submitForm} />
       </form>
     </div>
   );
