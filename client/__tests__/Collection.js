@@ -37,6 +37,6 @@ describe('Collection tests', () => {
       expect(wrapper.find('div').first().text()).toMatch(props.author);
     });
 
-    // test link to view collection
+    // test link to view collection, register, and log in
   });
 });

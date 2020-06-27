@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import LikeButton from './LikeButton';
 import SaveButton from './SaveButton';
 
-// import './Collection.css';
+import './Collection.css';
 
 const Collection = ({ id, title, description, author, loggedInUser }) => (
   <div key={id} className="collection">
