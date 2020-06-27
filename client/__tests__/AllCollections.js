@@ -19,7 +19,7 @@ describe('AllCollections tests', () => {
   mount(
     <MemoryRouter initialEntries={['/1231']}>
       <Route exact path="/:userId" component={AllCollections} />
-    </MemoryRouter>,
+    </MemoryRouter>
   );
 
   // const testData = [{
