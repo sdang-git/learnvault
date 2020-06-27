@@ -40,13 +40,13 @@ describe('React unit tests', () => {
       // const mockConsole = jest.fn();
       // global.console = { log: mockConsole, error: mockConsole };
 
-      const mockConsole = jest.spyOn(global.console, 'log').mockImplementation();
+      // const mockConsole = jest.spyOn(global.console, 'log').mockImplementation();
 
       wrapper.find('.button-like').simulate('click');
       expect(mockFetch).toHaveBeenCalled();
       expect(mockFetch).toHaveBeenCalledTimes(1);
       // expect(mockFetch.mock.calls.length).toBe(1);
-      expect(mockConsole).toHaveBeenCalled();
+      // expect(mockConsole).toHaveBeenCalled();
 
       const arg1 = `/api/collections/save/${props.id}`;
       const arg2 = {
