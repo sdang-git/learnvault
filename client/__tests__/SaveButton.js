@@ -14,16 +14,9 @@ describe('React unit tests', () => {
       id: '5eee5bac1e986de551d57488', // collectionId
     };
 
-    // const originalFetch = global.fetch;
-    // const mockConsole = jest.spyOn(global.console, 'log').mockImplementation();
-
     beforeAll(() => {
       wrapper = shallow(<SaveButton loggedInUser={props.loggedInUser} id={props.id} />);
     });
-
-    // afterAll(() => {
-    //   global.fetch = originalFetch;
-    // });
 
     it('Renders a <button> tag with the label "Save Collection"', () => {
       expect(wrapper.type()).toEqual('button');
@@ -37,16 +30,9 @@ describe('React unit tests', () => {
       }));
       global.fetch = mockFetch;
 
-      // const mockConsole = jest.fn();
-      // global.console = { log: mockConsole, error: mockConsole };
-
-      // const mockConsole = jest.spyOn(global.console, 'log').mockImplementation();
-
       wrapper.find('.button-like').simulate('click');
       expect(mockFetch).toHaveBeenCalled();
       expect(mockFetch).toHaveBeenCalledTimes(1);
-      // expect(mockFetch.mock.calls.length).toBe(1);
-      // expect(mockConsole).toHaveBeenCalled();
 
       const arg1 = `/api/collections/save/${props.id}`;
       const arg2 = {

@@ -6,7 +6,9 @@ import SaveButton from './SaveButton';
 
 import './Collection.css';
 
-const Collection = ({ id, title, description, author, loggedInUser }) => (
+const Collection = ({
+  id, title, description, author, loggedInUser,
+}) => (
   <div key={id} className="collection">
     <h1 className="collection__title">{title}</h1>
     <h3>{description}</h3>

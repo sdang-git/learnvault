@@ -7,11 +7,15 @@ import LikeButton from './LikeButton';
 import SaveButton from './SaveButton';
 
 const ExpandedCollection = ({ loggedInUser }) => {
+  // console.log('Invoked ExpandedCollection', loggedInUser);
   const [collection, setCollection] = useState([]);
-
   const { id } = useParams();
 
+  // console.log('useState collection', collection);
+  // console.log('useParams id', id);
+
   useEffect(() => {
+    // console.log('Fetching /api/collections for', id);
     fetch(`/api/collections/${id}`)
       .then((res) => res.json())
       .then((result) => {
@@ -19,9 +23,9 @@ const ExpandedCollection = ({ loggedInUser }) => {
       });
   }, []);
 
+  // console.log('useEffect collection', collection);
   return (
-
-    <div key={collection._id} className="collection-div">
+    <div className="collection-div">
       <h1>
         {collection.title}
       </h1>
@@ -61,7 +65,6 @@ const ExpandedCollection = ({ loggedInUser }) => {
         </div>
       )}
     </div>
-
   );
 };
 

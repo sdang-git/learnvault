@@ -14,15 +14,9 @@ describe('React unit tests', () => {
       id: '5eee5bac1e986de551d57488', // collectionId
     };
 
-    // const originalFetch = global.fetch;
-
     beforeAll(() => {
       wrapper = shallow(<LikeButton loggedInUser={props.loggedInUser} id={props.id} />);
     });
-
-    // afterAll(() => {
-    //   global.fetch = originalFetch;
-    // });
 
     it('Renders a <button> tag with the label "Like Collection"', () => {
       expect(wrapper.type()).toEqual('button');
