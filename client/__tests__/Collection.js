@@ -60,7 +60,7 @@ describe('Collection tests', () => {
 
     // alternate way to actually verify the components are being rendered
     // uses package: jest-enzyme
-    it('displays Like and Save buttons if logged in', () => {
+    it('renders the LikeButton and SaveButton components if logged in', () => {
       expect(wrapper).toContainReact(<LikeButton loggedInUser={props.loggedInUser} id={props.id} />);
       expect(wrapper).toContainReact(<SaveButton loggedInUser={props.loggedInUser} id={props.id} />);
     });

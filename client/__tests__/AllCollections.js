@@ -36,27 +36,6 @@ describe('AllCollections tests', () => {
   }));
   global.fetch = mockFetch;
 
-  // beforeAll(async () => {
-  // await act(async () => {
-  //   wrapper = mount(
-  //     <MemoryRouter initialEntries={['/5ef3f1798a8800471b987bbe']}>
-  //       <Route path="/:userId" component={AllCollections} />
-  //     </MemoryRouter>,
-  //   );
-  // });
-
-  // wrapper = mount(
-  //   <MemoryRouter initialEntries={['/5ef3f1798a8800471b987bbe']}>
-  //     <Route path="/:userId" component={AllCollections} />
-  //   </MemoryRouter>,
-  // );
-  // wrapper = shallow(
-  //   <MemoryRouter initialEntries={['/5ef3f1798a8800471b987bbe']}>
-  //     <Route path="/:userId" component={AllCollections} />
-  //   </MemoryRouter>,
-  // );
-  // });
-
   const RenderWithRouter = ({ children }) => (
     <MemoryRouter initialEntries={[`/${testProps.loggedInUser}`]}>
       <Route path="/:userId">{children}</Route>
@@ -78,8 +57,6 @@ describe('AllCollections tests', () => {
   });
 
   it('renders correctly for All Collections', () => {
-    // console.log('wrapper.html', wrapper.html());
-    // console.log('wrapper.text', wrapper.text());
     // expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('h1').text()).toEqual('All Collections');
   });

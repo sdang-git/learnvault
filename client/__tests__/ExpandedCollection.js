@@ -66,7 +66,7 @@ describe('ExpandedCollection tests', () => {
     expect(wrapper.text()).toMatch(testData.links[1]);
   });
 
-  it('renders Like and Save buttons if logged in', () => {
+  it('displays Like and Save buttons if logged in', () => {
     expect(wrapper.find('button')).toHaveLength(2);
     expect(wrapper.text()).toMatch('Like Collection');
     expect(wrapper.text()).toMatch('Save Collection');
@@ -74,12 +74,12 @@ describe('ExpandedCollection tests', () => {
 
   // alternate way to actually verify the components are being rendered
   // uses package: jest-enzyme
-  it('displays Like and Save buttons if logged in', () => {
+  it('renders LikeButton and SaveButton components if logged in', () => {
     expect(wrapper).toContainReact(<LikeButton loggedInUser={testProps.loggedInUser} id={testProps.id} />);
     expect(wrapper).toContainReact(<SaveButton loggedInUser={testProps.loggedInUser} id={testProps.id} />);
   });
 
-  it('nags the user to login if not logged in', async () => {
+  it('displays message to register or login if not logged in', async () => {
     await act(async () => {
       wrapper = mount(
         <RenderWithRouter>
