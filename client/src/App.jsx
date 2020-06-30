@@ -11,6 +11,7 @@ import WithAuth from './components/WithAuth';
 import AllCollections from './components/collections/AllCollections';
 import ExpandedCollection from './components/collections/ExpandedCollection';
 import SavedCollections from './components/collections/SavedCollections';
+import AddCollection from './components/collections/AddCollection';
 
 import './App.css';
 
@@ -45,6 +46,10 @@ const App = () => {
 
           <Route path="/savedcollections">
             <SavedCollections loggedInUser={loggedInUser} />
+          </Route>
+
+          <Route path="/addcollection">
+            <AddCollection loggedInUser={loggedInUser} />
           </Route>
 
           <Route path="/" exact>

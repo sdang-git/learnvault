@@ -138,7 +138,7 @@ router.post(
       console.error(err.message);
       res.status(500).send('Server Error');
     }
-  },
+  }
 );
 
 // GET '/api/collections/:id' - Get a collection by ID
@@ -168,7 +168,7 @@ router.get('/:id', async (req, res) => {
     return res
       .status(500)
       .send(
-        'Server Error or Collection not found due to invalid Collection ID',
+        'Server Error or Collection not found due to invalid Collection ID'
       );
   }
 });
@@ -218,10 +218,11 @@ router.put('/:id', async (req, res) => {
         _id: req.params.id,
       },
       collectionDetails,
-      { new: true, upsert: false },
+      { new: true, upsert: false }
     );
 
     if (!collection) {
+      console.log('no collection');
       return res.status(404).json({ msg: 'Collection not found' });
     }
 
@@ -263,11 +264,13 @@ router.delete('/:id', async (req, res) => {
 // @access  Private
 
 router.put('/like/:id', async (req, res) => {
-  const collection = await Collection.findById((req.body.collectionId));
+  const collection = await Collection.findById(req.body.collectionId);
 
   try {
     if (collection.likes.filter((like) => like === req.body.id).length > 0) {
-      return res.status(400).json({ msg: 'You have already liked this collection' });
+      return res
+        .status(400)
+        .json({ msg: 'You have already liked this collection' });
     }
 
     collection.likes.push(req.body.id);
@@ -290,12 +293,17 @@ router.put('/unlike/:id', async (req, res) => {
   const collection = await Collection.findById(req.params.id);
 
   try {
-    if ((collection.likes.filter((like) => like.user === req.user.name)).length === 0) {
-      return res.status(400).json({ msg: 'You have not liked this collection' });
+    if (
+      collection.likes.filter((like) => like.user === req.user.name).length ===
+      0
+    ) {
+      return res
+        .status(400)
+        .json({ msg: 'You have not liked this collection' });
     }
 
-    const indexToRemove = collection.likes.map(
-      (like) => like.user.toString().indexOf(req.user.name),
+    const indexToRemove = collection.likes.map((like) =>
+      like.user.toString().indexOf(req.user.name)
     );
 
     collection.likes.splice(indexToRemove, 1);
@@ -315,11 +323,16 @@ router.put('/unlike/:id', async (req, res) => {
 // @access  Private
 
 router.put('/save/:id', async (req, res) => {
-  const user = await User.findById((req.body.id));
+  const user = await User.findById(req.body.id);
 
   try {
-    if (user.savedcollections.filter((col) => col === req.body.collectionId).length > 0) {
-      return res.status(400).json({ msg: 'You have already saved this collection' });
+    if (
+      user.savedcollections.filter((col) => col === req.body.collectionId)
+        .length > 0
+    ) {
+      return res
+        .status(400)
+        .json({ msg: 'You have already saved this collection' });
     }
 
     user.savedcollections.push(req.body.collectionId);
@@ -340,11 +353,13 @@ router.put('/save/:id', async (req, res) => {
 
 router.get('/savedcollections/:userId', async (req, res) => {
   // const collection = await Collection.findById((req.body.collectionId));
-  const user = await User.findById((req.params.userId));
+  const user = await User.findById(req.params.userId);
 
   try {
     if (user.savedcollections.length === 0) {
-      return res.status(400).json({ msg: 'You have not saved any collections' });
+      return res
+        .status(400)
+        .json({ msg: 'You have not saved any collections' });
     }
 
     return res.send(user.savedcollections);
@@ -392,7 +407,9 @@ router.put('/tags/:id', async (req, res) => {
   const collection = Collection.findById(req.params.id);
 
   try {
-    if ((collection.tags.filter((tag) => tag.toString() === req.tag)).length > 0) {
+    if (
+      collection.tags.filter((tag) => tag.toString() === req.tag).length > 0
+    ) {
       return res.status(400).json({ msg: 'Tag already exists on collection' });
     }
 
@@ -421,7 +438,9 @@ router.get('/user/:id', async (req, res) => {
   const userId = req.params.id;
 
   try {
-    const collections = await Collection.find({ author: userId }).sort({ date: -1 });
+    const collections = await Collection.find({ author: userId }).sort({
+      date: -1,
+    });
     res.json(collections);
   } catch (err) {
     console.error(err.message);
