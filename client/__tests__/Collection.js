@@ -1,7 +1,10 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Collection from '../src/components/collections/Collection.jsx';
+import LikeButton from '../src/components/collections/LikeButton';
+import SaveButton from '../src/components/collections/SaveButton';
+import Collection from '../src/components/collections/Collection';
 
 configure({ adapter: new Adapter() });
 
@@ -18,7 +21,16 @@ describe('Collection tests', () => {
     };
 
     beforeAll(() => {
-      wrapper = shallow(<Collection {...props} />);
+      wrapper = shallow(
+        <Collection
+          key={props.key}
+          id={props.id}
+          title={props.title}
+          description={props.description}
+          author={props.author}
+          loggedInUser={props.loggedInUser}
+        />,
+      );
     });
 
     it('renders correctly', () => {
@@ -37,6 +49,35 @@ describe('Collection tests', () => {
       expect(wrapper.find('div').first().text()).toMatch(props.author);
     });
 
-    // test link to view collection, register, and log in
+    it('displays a Link with view the collection', () => {
+      expect(wrapper.find('Link').text()).toMatch('View Collection');
+    });
+
+    it('displays Like and Save buttons if logged in', () => {
+      expect(wrapper.find('LikeButton')).toHaveLength(1);
+      expect(wrapper.find('SaveButton')).toHaveLength(1);
+    });
+
+    // alternate way to actually verify the components are being rendered
+    // uses package: jest-enzyme
+    it('renders the LikeButton and SaveButton components if logged in', () => {
+      expect(wrapper).toContainReact(<LikeButton loggedInUser={props.loggedInUser} id={props.id} />);
+      expect(wrapper).toContainReact(<SaveButton loggedInUser={props.loggedInUser} id={props.id} />);
+    });
+
+    it('displays message to register or login if not logged in', () => {
+      wrapper = shallow(
+        <Collection
+          key={props.key}
+          id={props.id}
+          title={props.title}
+          description={props.description}
+          author={props.author}
+          loggedInUser={null}
+        />,
+      );
+      expect(wrapper.text()).toMatch('Register');
+      expect(wrapper.text()).toMatch('Login');
+    });
   });
 });

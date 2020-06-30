@@ -1,3 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Collection tests Collection renders correctly 1`] = `ShallowWrapper {}`;
+exports[`Collection tests Collection renders correctly 1`] = `
+<div
+  className="collection"
+  key="4354"
+>
+  <h1
+    className="collection__title"
+  >
+    Collection
+  </h1>
+  <h3>
+    buncha stuff
+  </h3>
+  <div
+    className="creator"
+  >
+    <div
+      className="creator__label"
+    >
+      Creator:
+    </div>
+    <div
+      className="creator__author"
+    >
+      Veronica
+    </div>
+  </div>
+  <div>
+    <Link
+      className="collection__button"
+      to="/collections/4354"
+    >
+      View Collection
+    </Link>
+  </div>
+  <div>
+    <br />
+    <LikeButton
+      id={4354}
+      loggedInUser="Sarge"
+    />
+    <SaveButton
+      id={4354}
+      loggedInUser="Sarge"
+    />
+  </div>
+</div>
+`;
