@@ -19,6 +19,7 @@ const ExpandedCollection = ({ loggedInUser }) => {
     fetch(`/api/collections/${id}`)
       .then((res) => res.json())
       .then((result) => {
+        console.log(result);
         setCollection(result);
       });
   }, []);
@@ -26,12 +27,8 @@ const ExpandedCollection = ({ loggedInUser }) => {
   // console.log('useEffect collection', collection);
   return (
     <div className="collection-div">
-      <h1>
-        {collection.title}
-      </h1>
-      <h3>
-        {collection.description}
-      </h3>
+      <h1>{collection.title}</h1>
+      <h3>{collection.description}</h3>
 
       <div className="creator">
         <div className="creator__label">Creator:</div>
@@ -40,13 +37,13 @@ const ExpandedCollection = ({ loggedInUser }) => {
 
       {collection.links && (
         <div className="links">
-          {collection.links.map(
-            (link) => (
-              <div className="links__item" key={link}>
-                <a href={link} target="_blank" rel="noreferrer">{link}</a>
-              </div>
-            ),
-          )}
+          {collection.links.map((link) => (
+            <div className="links__item" key={link}>
+              <a href={link} target="_blank" rel="noreferrer">
+                {link}
+              </a>
+            </div>
+          ))}
         </div>
       )}
 
