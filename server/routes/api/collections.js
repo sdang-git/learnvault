@@ -89,6 +89,7 @@ router.get('/', async (req, res) => {
 router.post(
   '/', // Add validation middleware here
   async (req, res) => {
+    // console.log('invoked collection.post req.body', req.body);
     try {
       // Check for user here and add code to validate logged in user
       // Get username for user from the database
@@ -111,7 +112,7 @@ router.post(
       if (author) collectionDetails.author = author;
       if (title) collectionDetails.title = title;
       if (description) collectionDetails.description = description;
-      if (hidden) collectionDetails.hidden = hidden;
+      if (hidden !== undefined) collectionDetails.hidden = hidden;
       if (category) collectionDetails.category = category;
       if (text) collectionDetails.text = text;
 
@@ -129,6 +130,7 @@ router.post(
         collectionDetails.links = links.split(',').map((link) => link.trim());
       }
 
+      // console.log('collectionDetails', collectionDetails);
       const collection = new Collection(collectionDetails);
 
       await collection.save();
@@ -138,7 +140,7 @@ router.post(
       console.error(err.message);
       res.status(500).send('Server Error');
     }
-  }
+  },
 );
 
 // GET '/api/collections/:id' - Get a collection by ID
@@ -168,7 +170,7 @@ router.get('/:id', async (req, res) => {
     return res
       .status(500)
       .send(
-        'Server Error or Collection not found due to invalid Collection ID'
+        'Server Error or Collection not found due to invalid Collection ID',
       );
   }
 });
@@ -218,7 +220,7 @@ router.put('/:id', async (req, res) => {
         _id: req.params.id,
       },
       collectionDetails,
-      { new: true, upsert: false }
+      { new: true, upsert: false },
     );
 
     if (!collection) {
@@ -294,17 +296,15 @@ router.put('/unlike/:id', async (req, res) => {
 
   try {
     if (
-      collection.likes.filter((like) => like.user === req.user.name).length ===
-      0
+      collection.likes.filter((like) => like.user === req.user.name).length
+      === 0
     ) {
       return res
         .status(400)
         .json({ msg: 'You have not liked this collection' });
     }
 
-    const indexToRemove = collection.likes.map((like) =>
-      like.user.toString().indexOf(req.user.name)
-    );
+    const indexToRemove = collection.likes.map((like) => like.user.toString().indexOf(req.user.name));
 
     collection.likes.splice(indexToRemove, 1);
 
