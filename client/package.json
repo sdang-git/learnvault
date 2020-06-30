@@ -8,7 +8,8 @@
     "server": "cd ../server && npm run server",
     "build": "webpack --mode production",
     "react": "webpack-dev-server --mode development --open --hot",
-    "test": "jest --verbose --coverage --silent"
+    "test": "jest --verbose --coverage --silent",
+    "cypress:open": "cypress open"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "babel-loader": "^8.1.0",
     "concurrently": "^5.2.0",
     "css-loader": "^3.5.3",
+    "cypress": "^4.9.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
