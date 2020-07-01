@@ -6,8 +6,6 @@ import './ExpandedCollection.css';
 import LikeButton from './LikeButton';
 import SaveButton from './SaveButton';
 
-const fetch = require('node-fetch');
-
 const ExpandedCollection = ({ loggedInUser }) => {
   // console.log('Invoked ExpandedCollection', loggedInUser);
   const [collection, setCollection] = useState([]);
