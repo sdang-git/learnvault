@@ -49,7 +49,8 @@ const App = () => {
           </Route>
 
           <Route path="/addcollection">
-            <AddCollection loggedInUser={loggedInUser} />
+            {/* <AddCollection loggedInUser={loggedInUser} /> */}
+            <WithAuth Component={AddCollection} />
           </Route>
 
           <Route path="/" exact>

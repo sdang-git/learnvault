@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const saltRounds = 10;
-const secret = 'secret';
+const secret = process.env.JWT_SECRET;
 
 // ----------
 // Login user
@@ -45,7 +45,7 @@ exports.loginUser = (req, res) => {
       // If everything went well, issue a token
       const { _id: userId } = user;
       const payload = { userId };
-      const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+      const token = jwt.sign(payload, secret, { expiresIn: process.env.JWT_EXPIRATION });
       return res.cookie('token', token, { httpOnly: true }).send({ attempt: 'success', userId });
     });
   });
