@@ -35,8 +35,12 @@ const AddCollection = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Response: ', data);
+      })
+      .catch((err) => {
+        console.log('Error on add collection', err);
       });
   };
+
   return (
     <div className="addCollection">
       <h1>Add New Collection</h1>
@@ -46,9 +50,9 @@ const AddCollection = () => {
           <input
             type="text"
             name="author"
+            required
             onChange={(e) => setAuthor(e.target.value)}
             value={author}
-            required
           />
         </label>
         <br />
@@ -57,9 +61,9 @@ const AddCollection = () => {
           <input
             type="text"
             name="title"
+            required
             onChange={(e) => setTitle(e.target.value)}
             value={title}
-            required
           />
         </label>
         <br />
@@ -68,9 +72,9 @@ const AddCollection = () => {
           <input
             type="text"
             name="description"
+            required
             onChange={(e) => setDescription(e.target.value)}
             value={description}
-            required
           />
         </label>
         <br />
@@ -79,8 +83,8 @@ const AddCollection = () => {
           <input
             type="checkbox"
             name="hidden"
-            onChange={(e) => setHidden(e.target.value)}
-            required
+            onChange={() => setHidden(!hidden)}
+            value={hidden}
           />
         </label>
         <br />
