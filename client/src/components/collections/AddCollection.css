@@ -2,3 +2,8 @@ input {
   margin-bottom: 7px;
   margin-left: 7px;
 }
+
+#add-link {
+  margin-left: 8px;
+  cursor: pointer;
+}
