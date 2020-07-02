@@ -7,7 +7,7 @@
     "server": "nodemon server.js",
     "react": "cd ../client && npm run react",
     "start": "concurrently \"npm run server\" \"npm run react\"",
-    "test": "jest --verbose"
+    "test": "jest --verbose --coverage"
   },
   "keywords": [],
   "author": "",

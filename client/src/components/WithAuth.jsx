@@ -12,12 +12,12 @@ const WithAuth = ({ Component }) => {
         if (res.status === 200) {
           setLoading(false);
         } else {
-          const error = new Error(res.error);
+          const error = new Error(res.statusText);
           throw error;
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log('fetch /api/checkToken caught error', err);
         setLoading(false);
         setRedirect(true);
       });
