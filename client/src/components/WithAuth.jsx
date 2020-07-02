@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-const WithAuth = ({ Component }) => {
+const WithAuth = ({
+  Component, setLoggedInUser, loggedInUser, id,
+}) => {
   const [loading, setLoading] = useState(true);
   const [redirect, setRedirect] = useState(false);
 
@@ -18,6 +20,7 @@ const WithAuth = ({ Component }) => {
       })
       .catch((err) => {
         console.log('fetch /api/checkToken caught error', err);
+        setLoggedInUser('');
         setLoading(false);
         setRedirect(true);
       });
@@ -31,7 +34,7 @@ const WithAuth = ({ Component }) => {
   }
 
   return (
-    <Component />
+    <Component loggedInUser={loggedInUser} id={id} />
   );
 };
 

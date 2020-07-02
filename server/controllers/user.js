@@ -93,7 +93,7 @@ exports.registerUser = async (req, res) => {
 
       const { _id: userId } = result;
       const payload = { userId };
-      const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+      const token = jwt.sign(payload, secret, { expiresIn: process.env.JWT_EXPIRATION });
       return res.cookie('token', token, { httpOnly: true }).send({ registrationSuccessful: true, userId });
     })
     .catch((err) => {
