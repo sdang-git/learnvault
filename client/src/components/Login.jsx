@@ -26,7 +26,7 @@ const Login = ({ setLoggedInUser, setTimerId, timerId }) => {
           const newTimerId = setTimeout(() => {
             setLoggedInUser('');
             history.push('/login');
-          }, 15000);
+          }, 3600000);
           setTimerId(newTimerId);
           setLoggedInUser(data.userId);
           history.push('/');
