@@ -21,10 +21,10 @@ const SaveButton = ({ id, loggedInUser }) => {
   }
 
   return (
-    <button onClick={() => likeButtonClick(id, loggedInUser)} type="button" className="button-like">
+    <span onClick={() => likeButtonClick(id, loggedInUser)} type="button" className="button-like">
       <i className="far fa-star" />
     &nbsp; Save Collection
-    </button>
+    </span>
   );
 };
 

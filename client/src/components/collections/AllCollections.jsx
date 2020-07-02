@@ -49,6 +49,7 @@ const AllCollections = ({ loggedInUser, userCollections }) => {
             description={collection.description}
             author={collection.author}
             loggedInUser={loggedInUser}
+            likes={collection.likes}
           />
         ))
       ) : (

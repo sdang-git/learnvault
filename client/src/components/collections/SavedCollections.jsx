@@ -53,6 +53,7 @@ const SavedCollections = ({ loggedInUser }) => {
               description={collection.description}
               author={collection.author}
               loggedInUser={loggedInUser}
+              likes={collection.likes}
             />
           ))) : <li> Loading...</li>}
     </div>
