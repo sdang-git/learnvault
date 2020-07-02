@@ -1,6 +1,7 @@
 const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
+const router = require('../routes/api/collections');
 
 const server = 'http://localhost:5000';
 
@@ -27,7 +28,7 @@ describe('/:id', () => {
   describe('PUT', () => {
     it('updates collection with provided info', () => {
       return request(server)
-        .put('/api/collections/5ee53832573c6f01f2945b58')
+        .put('/api/collections/5ef81c758e61a78b605e5e70')
         .send({ title: 'Cool resources' })
         .set('Accept', 'application/json')
         .then((response) => {
@@ -50,7 +51,7 @@ describe('/:id', () => {
   describe('GET', () => {
     it('gets collection with given id', () => {
       return request(server)
-        .get('/api/collections/5ee53832573c6f01f2945b58')
+        .get('/api/collections/5ef81c758e61a78b605e5e70')
         .then((response) => {
           expect(response.body.title).toEqual('Cool resources');
         });
@@ -105,7 +106,7 @@ describe('/user/:id', () => {
   describe('GET', () => {
     it('gets collection by userId', () => {
       return request(server)
-        .get('/api/collections/user/5ee987670ca9dc164756f5bd')
+        .get('/api/collections/user/5ef543db5ab0a24edef2aaa3')
         .expect(200);
     });
   });
