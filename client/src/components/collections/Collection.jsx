@@ -7,7 +7,7 @@ import SaveButton from './SaveButton';
 import './Collection.css';
 
 const Collection = ({
-  id, title, description, author, loggedInUser, likes
+  id, title, description, author, loggedInUser, likes,
 }) => (
   <div key={id} className="collection">
     <h1 className="collection__title">{title}</h1>

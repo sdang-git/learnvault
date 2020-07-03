@@ -11,24 +11,26 @@ configure({ adapter: new Adapter() });
 describe('Collection tests', () => {
   describe('Collection', () => {
     let wrapper;
-    const props = {
+    const testProps = {
       key: 544,
       id: 4354,
       title: 'Collection',
       description: 'buncha stuff',
       author: 'Veronica',
       loggedInUser: 'Sarge',
+      likes: ['5ef2b8c3d5973033a191aea2', '5ef3f1798a8800471b987bbe', '5ef7840ba4aca16282b26299'],
     };
 
     beforeAll(() => {
       wrapper = shallow(
         <Collection
-          key={props.key}
-          id={props.id}
-          title={props.title}
-          description={props.description}
-          author={props.author}
-          loggedInUser={props.loggedInUser}
+          key={testProps.key}
+          id={testProps.id}
+          title={testProps.title}
+          description={testProps.description}
+          author={testProps.author}
+          loggedInUser={testProps.loggedInUser}
+          likes={testProps.likes}
         />,
       );
     });
@@ -38,15 +40,15 @@ describe('Collection tests', () => {
     });
 
     it('renders an h1 element that displays collection title', () => {
-      expect(wrapper.find('h1').text()).toMatch(props.title);
+      expect(wrapper.find('h1').text()).toMatch(testProps.title);
     });
 
     it('renders an h3 element that displays collection description', () => {
-      expect(wrapper.find('h3').text()).toMatch(props.description);
+      expect(wrapper.find('h3').text()).toMatch(testProps.description);
     });
 
     it('displays div with name of author', () => {
-      expect(wrapper.find('div').first().text()).toMatch(props.author);
+      expect(wrapper.find('div').first().text()).toMatch(testProps.author);
     });
 
     it('displays a Link with view the collection', () => {
@@ -61,19 +63,20 @@ describe('Collection tests', () => {
     // alternate way to actually verify the components are being rendered
     // uses package: jest-enzyme
     it('renders the LikeButton and SaveButton components if logged in', () => {
-      expect(wrapper).toContainReact(<LikeButton loggedInUser={props.loggedInUser} id={props.id} />);
-      expect(wrapper).toContainReact(<SaveButton loggedInUser={props.loggedInUser} id={props.id} />);
+      expect(wrapper).toContainReact(<LikeButton loggedInUser={testProps.loggedInUser} likes={testProps.likes} id={testProps.id} />);
+      expect(wrapper).toContainReact(<SaveButton loggedInUser={testProps.loggedInUser} id={testProps.id} />);
     });
 
     it('displays message to register or login if not logged in', () => {
       wrapper = shallow(
         <Collection
-          key={props.key}
-          id={props.id}
-          title={props.title}
-          description={props.description}
-          author={props.author}
+          key={testProps.key}
+          id={testProps.id}
+          title={testProps.title}
+          description={testProps.description}
+          author={testProps.author}
           loggedInUser={null}
+          likes={testProps.likes}
         />,
       );
       expect(wrapper.text()).toMatch('Register');
