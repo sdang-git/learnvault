@@ -67,16 +67,21 @@ describe('ExpandedCollection tests', () => {
   });
 
   it('displays Like and Save buttons if logged in', () => {
-    expect(wrapper.find('button')).toHaveLength(2);
-    expect(wrapper.text()).toMatch('Like Collection');
-    expect(wrapper.text()).toMatch('Save Collection');
+    expect(wrapper.find('span')).toHaveLength(2);
+    expect(wrapper.find('span').at(0).text()).toMatch(`${testData.likes.length}`);
+    expect(wrapper.find('span').at(1).text()).toMatch('Save Collection');
   });
 
   // alternate way to actually verify the components are being rendered
   // uses package: jest-enzyme
   it('renders LikeButton and SaveButton components if logged in', () => {
-    expect(wrapper).toContainReact(<LikeButton loggedInUser={testProps.loggedInUser} id={testProps.id} />);
-    expect(wrapper).toContainReact(<SaveButton loggedInUser={testProps.loggedInUser} id={testProps.id} />);
+    // expect(wrapper).toContainReact(<LikeButton loggedInUser={testProps.loggedInUser} likes={testData.likes} id={testProps.id} />);
+    // expect(wrapper).toContainReact(<SaveButton loggedInUser={testProps.loggedInUser} id={testProps.id} />);
+    expect(wrapper.find('LikeButton')).toHaveProp('loggedInUser', testProps.loggedInUser);
+    expect(wrapper.find('LikeButton')).toHaveProp('likes', []);
+    expect(wrapper.find('LikeButton')).toHaveProp('id', testProps.id);
+    expect(wrapper.find('SaveButton')).toHaveProp('loggedInUser', testProps.loggedInUser);
+    expect(wrapper.find('SaveButton')).toHaveProp('id', testProps.id);
   });
 
   it('displays message to register or login if not logged in', async () => {

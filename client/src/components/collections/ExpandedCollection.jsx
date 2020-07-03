@@ -8,7 +8,7 @@ import SaveButton from './SaveButton';
 
 const ExpandedCollection = ({ loggedInUser }) => {
   // console.log('Invoked ExpandedCollection', loggedInUser);
-  const [collection, setCollection] = useState([]);
+  const [collection, setCollection] = useState({ likes: [] });
   const { id } = useParams();
 
   // console.log('useState collection', collection);
@@ -50,7 +50,7 @@ const ExpandedCollection = ({ loggedInUser }) => {
       {loggedInUser ? (
         <div>
           <br />
-          <LikeButton loggedInUser={loggedInUser} id={id} />
+          <LikeButton loggedInUser={loggedInUser} likes={collection.likes} id={id} />
           <SaveButton loggedInUser={loggedInUser} id={id} />
         </div>
       ) : (

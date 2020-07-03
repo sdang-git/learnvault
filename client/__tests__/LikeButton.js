@@ -12,24 +12,27 @@ describe('React unit tests', () => {
     const props = {
       loggedInUser: '5ef3f1798a8800471b987bbe', // userId
       id: '5eee5bac1e986de551d57488', // collectionId
+      likes: ['5ef3f1798a8800471b987bbe'],
     };
 
     beforeAll(() => {
-      wrapper = shallow(<LikeButton loggedInUser={props.loggedInUser} id={props.id} />);
+      wrapper = shallow(<LikeButton loggedInUser={props.loggedInUser} likes={props.likes} id={props.id} />);
+      console.log('wrapper.html', wrapper.html());
+      console.log('wrapper.text', wrapper.text());
     });
 
-    it('Renders a <button> tag with the label "Like Collection"', () => {
-      expect(wrapper.type()).toEqual('button');
-      expect(wrapper.text()).toMatch('Like Collection');
+    it('Renders a <span> tag with the label "Like Collection"', () => {
+      expect(wrapper.find('span')).toHaveLength(1);
+      expect(wrapper.find('span').text()).toMatch(String(props.likes.length));
     });
 
-    it('Invokes the click handler when the Like button is pressed', () => {
+    it('Invokes the click handler when the Like button is cliked', () => {
       const mockFetch = jest.fn(() => Promise.resolve({
         status: 200,
         json: () => ['5ef2b8c3d5973033a191aea2', '5ef3f1798a8800471b987bbe'],
       }));
       global.fetch = mockFetch;
-      wrapper.find('.button-like').simulate('click');
+      wrapper.find('.button-like').props().onClick({ key: 'Enter' });
       expect(mockFetch).toHaveBeenCalled();
       expect(mockFetch.mock.calls.length).toBe(1);
 
@@ -44,10 +47,16 @@ describe('React unit tests', () => {
       expect(mockFetch).toHaveBeenCalledWith(arg1, arg2);
     });
 
-    it('Invokes the click handler when the Like button is pressed (error path)', () => {
+    it('Invokes the click handler when the Like button is clicked (error path)', () => {
       const mockFetch = jest.fn(() => Promise.reject(new Error('should catch this error')));
       global.fetch = mockFetch;
-      wrapper.find('.button-like').simulate('click');
+      wrapper.find('.button-like').props().onClick({ key: 'Enter' });
+    });
+
+    it('Invokes the click handler when the Save button is keypressed (error path)', () => {
+      const mockFetch = jest.fn(() => Promise.reject(new Error('should catch this error')));
+      global.fetch = mockFetch;
+      wrapper.find('.button-like').props().onKeyPress({ key: 'Enter' });
     });
   });
 });
