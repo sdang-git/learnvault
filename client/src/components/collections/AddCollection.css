@@ -7,3 +7,9 @@ input {
   margin-left: 8px;
   cursor: pointer;
 }
+
+.label-note {
+  color: lightslategray;
+  display: block;
+  font-size: 0.8em;
+}

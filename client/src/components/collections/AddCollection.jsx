@@ -4,64 +4,83 @@ import './AddCollection.css';
 
 const AddCollection = () => {
   const linkField = { link: '' };
-  const [author, setAuthor] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [hidden, setHidden] = useState(false);
-  const [contributors, setContributors] = useState('');
-  const [text, setText] = useState('');
-  const [category, setCategory] = useState('');
-  const [tags, setTags] = useState('');
-  const [links, setLinks] = useState('');
+  const [formData, setFormData] = useState({
+    author: '',
+    title: '',
+    description: '',
+    hidden: false,
+    contributors: '',
+    text: '',
+    category: '',
+    tags: '',
+    links: '',
+  });
+
   // this is for link input fields
   const [linkInput, setLinkInput] = useState([{ ...linkField }]);
-  let tempLinks = '';
 
   // Add new link field to form so you can add multiple links
   const addLinkField = () => {
     setLinkInput([...linkInput, { ...linkField }]);
   };
 
-  // Goes through all links in different link fields and puts them together into one string
-  const addLinks = () => {
-    // Go through the link inputs (minus 1)
-    for (let i = 0; i < linkInput.length - 1; i++) {
-      // Add value of input field (plus a comma and space) to temp variable
-      tempLinks += document.getElementById(`link-${i}`).value;
-      tempLinks += ', ';
+  const updateForm = (e) => {
+    if (e.target.name === 'hidden') {
+      setFormData({
+        ...formData,
+        hidden: !hidden,
+      });
+    } else if (e.target.name === 'link') {
+      console.log('links state: ', links);
+      let temp;
+      e.target.id === 'link-0'
+        ? (temp = `${e.target.value}`)
+        : (temp = `${links}, ${e.target.value}`);
+      console.log('temp: ', temp);
+      setFormData({
+        ...formData,
+        links: temp,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
     }
-    // Add last link (doesn't need comma after it)
-    tempLinks += document.getElementById(`link-${linkInput.length - 1}`).value;
-    // Set links state with the new temporary variable string
-    setLinks(tempLinks);
   };
+
+  const {
+    author,
+    title,
+    description,
+    hidden,
+    contributors,
+    text,
+    category,
+    tags,
+    links,
+  } = formData;
 
   const addCollection = (e) => {
     e.preventDefault();
-    // Supposed to put links together before fetch request - Couldn't get async to work for this
-    // Needs work. new state does not seem to be available when fetch request is made
-    addLinks();
+    // const temp = [];
+    // Object.keys(formData).forEach((key) => {
+    //   if (key.indexOf('link') > -1 && key !== 'links') {
+    //     temp.push(formData[key]);
+    //     delete formData[key];
+    //   }
+    //   formData.links = String(temp);
+    // });
     fetch('/api/collections', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        author,
-        title,
-        description,
-        hidden,
-        contributors,
-        text,
-        category,
-        tags,
-        links,
-      }),
+      body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log('Response: ', data);
-        console.log('Links: ', links);
       })
       .catch((err) => {
         console.log('Error on add collection', err);
@@ -74,33 +93,36 @@ const AddCollection = () => {
       <form>
         <label>
           Author:
+          <span className="label-note">(Required)</span>
           <input
             type="text"
             name="author"
             required
-            onChange={(e) => setAuthor(e.target.value)}
+            onChange={(e) => updateForm(e)}
             value={author}
           />
         </label>
         <br />
         <label>
           Title:
+          <span className="label-note">(Required)</span>
           <input
             type="text"
             name="title"
             required
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => updateForm(e)}
             value={title}
           />
         </label>
         <br />
         <label>
           Description:
+          <span className="label-note">(Required)</span>
           <input
             type="text"
             name="description"
             required
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => updateForm(e)}
             value={description}
           />
         </label>
@@ -110,7 +132,7 @@ const AddCollection = () => {
           <input
             type="checkbox"
             name="hidden"
-            onChange={() => setHidden(!hidden)}
+            onChange={(e) => updateForm(e)}
             value={hidden}
           />
         </label>
@@ -120,7 +142,7 @@ const AddCollection = () => {
           <input
             type="text"
             name="contributors"
-            onChange={(e) => setContributors(e.target.value)}
+            onChange={(e) => updateForm(e)}
             value={contributors}
           />
         </label>
@@ -130,7 +152,7 @@ const AddCollection = () => {
           <input
             type="text"
             name="text"
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => updateForm(e.target.value)}
             value={text}
           />
         </label>
@@ -140,7 +162,7 @@ const AddCollection = () => {
           <input
             type="text"
             name="category"
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => updateForm(e)}
             value={category}
           />
         </label>
@@ -150,7 +172,7 @@ const AddCollection = () => {
           <input
             type="text"
             name="tags"
-            onChange={(e) => setTags(e.target.value)}
+            onChange={(e) => updateForm(e)}
             value={tags}
           />
         </label>
@@ -161,14 +183,34 @@ const AddCollection = () => {
             <div key={`link-${idx}`}>
               <label>
                 Link:
-                <input type="text" name={link} id={link} />
+                <input
+                  type="text"
+                  name="link"
+                  id={link}
+                  onChange={(e) => updateForm(e)}
+                />
               </label>
+              <button
+                type="button"
+                id="add-link"
+                onClick={() => {
+                  addLinkField();
+                }}
+              >
+                +
+              </button>
             </div>
           );
         })}
-        <button type="button" id="add-link" onClick={addLinkField}>
+        {/* <button
+          type="button"
+          id="add-link"
+          onClick={() => {
+            addLinkField();
+          }} */}
+        {/* >
           +
-        </button>
+        </button> */}
         <br />
         <button type="submit" onClick={addCollection}>
           Submit
