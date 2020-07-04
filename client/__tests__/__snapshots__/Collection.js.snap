@@ -39,6 +39,13 @@ exports[`Collection tests Collection renders correctly 1`] = `
     <br />
     <LikeButton
       id={4354}
+      likes={
+        Array [
+          "5ef2b8c3d5973033a191aea2",
+          "5ef3f1798a8800471b987bbe",
+          "5ef7840ba4aca16282b26299",
+        ]
+      }
       loggedInUser="Sarge"
     />
     <SaveButton
