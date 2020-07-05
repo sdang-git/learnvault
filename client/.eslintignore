@@ -4,3 +4,4 @@ build/
 config/
 dist/
 coverage/
+__tests__/__snapshots__/

@@ -19,7 +19,8 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'no-console': 0,
-    'react/prop-types': 0,
-    'no-underscore-dangle': 0
+    'react/prop-types': 1,
+    'no-underscore-dangle': 0,
+    'max-len': 0
   },
 };
