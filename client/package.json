@@ -8,7 +8,7 @@
     "server": "cd ../server && npm run server",
     "build": "webpack --mode production",
     "react": "webpack-dev-server --mode development --open --hot",
-    "test": "STRYKER_DASHBOARD_API_KEY=612cb662-71fa-44aa-812a-aef59a63be1d jest --verbose --coverage --silent",
+    "test": "jest --verbose --coverage --silent",
     "lint": "eslint src -c .eslintrc.js --ext js,jsx"
   },
   "keywords": [],
