@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutator": "javascript",
+  "packageManager": "npm",
+  "reporters": [
+    "html",
+    "clear-text",
+    "progress",
+    "dashboard"
+  ],
+  "testRunner": "jest",
+  "transpilers": [
+    "babel",
+    "webpack"
+  ],
+  "coverageAnalysis": "off",
+  "babel": {
+    "optionsFile": ".babelrc"
+  },
+  "webpack": {
+    "configFile": "webpack.config.js"
+  },
+  "dashboard": {
+    "project": "github.com/sdang-git/learnvault",
+    "version": "stryker",
+    "baseUrl": "https://dashboard.stryker-mutator.io"
+  }
+}
