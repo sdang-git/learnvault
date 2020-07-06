@@ -13,7 +13,6 @@ const verifyToken = (req, res, next) => {
       return res.status(401).send('Unauthorized: Invalid token');
     }
 
-    // req.email = decoded.email;
     res.locals.userId = JSON.stringify(decoded.userId);
     // console.log('verifyToken userId', res.locals.userId);
     return next();
