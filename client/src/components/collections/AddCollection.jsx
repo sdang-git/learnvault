@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import './AddCollection.css';
-import ErrorAlert from '../ErrorAlert';
+import ResultAlert from '../ResultAlert';
 
 const AddCollection = () => {
   const linkField = { link: '' };
@@ -41,7 +41,6 @@ const AddCollection = () => {
         [e.target.name]: e.target.value,
       });
     }
-    console.log(`In updateForm. formData is: ${JSON.stringify(formData)}`);
   };
 
   const {
@@ -77,7 +76,9 @@ const AddCollection = () => {
       .then((data) => {
         if (data) {
           console.log('AddCollection successful!');
-          setRedirect(true);
+          setResult('success');
+          console.log('result? ', result);
+          setTimeout(() => setRedirect(true), 2000);
         }
       })
       .catch((err) => {
@@ -89,7 +90,7 @@ const AddCollection = () => {
   return (
     <div>
       {redirect ? <Redirect to="/" /> : null}
-      {result === 'error' && <ErrorAlert setResult={setResult} />}
+      {result !== null && <ResultAlert result={result} setResult={setResult} />}
       <div className="addCollection">
         <h1>Add New Collection</h1>
         <form>
