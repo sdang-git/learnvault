@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './LikeButton.css';
 
-const LikeButton = ({ id, loggedInUser }) => {
+const LikeButton = ({ id, loggedInUser, likes }) => {
   function likeButtonClick(eventId, userId) {
     const payload = { id: userId, collectionId: id };
 
@@ -23,10 +23,19 @@ const LikeButton = ({ id, loggedInUser }) => {
   }
 
   return (
-    <button onClick={() => likeButtonClick(id, loggedInUser)} type="button" className="button-like">
-      <i className="far fa-thumbs-up" />
-    &nbsp; Like Collection
-    </button>
+    <>
+      <span
+        onClick={() => likeButtonClick(id, loggedInUser, likes)}
+        onKeyPress={() => likeButtonClick(id, loggedInUser, likes)}
+        type="button"
+        className="button-like"
+        role="button"
+        tabIndex={0}
+      >
+        <i className="far fa-thumbs-up" />
+        <small>{likes.length}</small>
+      </span>
+    </>
   );
 };
 

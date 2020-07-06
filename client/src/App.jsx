@@ -11,15 +11,17 @@ import WithAuth from './components/WithAuth';
 import AllCollections from './components/collections/AllCollections';
 import ExpandedCollection from './components/collections/ExpandedCollection';
 import SavedCollections from './components/collections/SavedCollections';
+import AddCollection from './components/collections/AddCollection';
 
 import './App.css';
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState('');
+  const [timerId, setTimerId] = useState('');
 
   return (
     <Router>
-      <Nav loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+      <Nav loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} timerId={timerId} setTimerId={setTimerId} />
       <main>
         <Switch>
           <Route path="/register">
@@ -27,12 +29,12 @@ const App = () => {
           </Route>
 
           <Route path="/login">
-            <Login setLoggedInUser={setLoggedInUser} />
+            <Login setLoggedInUser={setLoggedInUser} setTimerId={setTimerId} timerId={timerId} />
           </Route>
 
           <Route path="/profile">
             {/* To protect a route, simply wrap it with a WithAuth component */}
-            <WithAuth Component={Profile} />
+            <WithAuth setLoggedInUser={setLoggedInUser} Component={Profile} loggedInUser={loggedInUser} />
           </Route>
 
           <Route path="/collections/user/:userId">
@@ -44,7 +46,12 @@ const App = () => {
           </Route>
 
           <Route path="/savedcollections">
-            <SavedCollections loggedInUser={loggedInUser} />
+            <WithAuth setLoggedInUser={setLoggedInUser} Component={SavedCollections} loggedInUser={loggedInUser} />
+          </Route>
+
+          <Route path="/addcollection">
+            {/* <AddCollection loggedInUser={loggedInUser} /> */}
+            <WithAuth setLoggedInUser={setLoggedInUser} Component={AddCollection} loggedInUser={loggedInUser} />
           </Route>
 
           <Route path="/" exact>

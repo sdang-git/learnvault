@@ -1,14 +1,17 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, BrowserRouter } from 'react-router-dom';
 
 import './Nav.css';
 
-const Nav = ({ loggedInUser, setLoggedInUser }) => {
+const Nav = ({
+  loggedInUser, setLoggedInUser, timerId, setTimerId,
+}) => {
   const history = useHistory();
 
   const logout = () => {
     console.log('logging out');
-    // TODO: clear token cookie
+    clearTimeout(timerId);
+    setTimerId('');
     setLoggedInUser('');
     history.push('/');
   };
@@ -39,6 +42,11 @@ const Nav = ({ loggedInUser, setLoggedInUser }) => {
           )}
           {loggedInUser && (
             <>
+              <li className="nav__item">
+                <Link to="/addcollection" className="nav__link">
+                  Add Collection
+                </Link>
+              </li>
               <li className="nav__item">
                 <Link to="/savedcollections" className="nav__link">
                   Saved Collections

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collection tests Collection renders correctly 1`] = `
+<div
+  className="collection"
+  key="4354"
+>
+  <h1
+    className="collection__title"
+  >
+    Collection
+  </h1>
+  <h3>
+    buncha stuff
+  </h3>
+  <div
+    className="creator"
+  >
+    <div
+      className="creator__label"
+    >
+      Creator:
+    </div>
+    <div
+      className="creator__author"
+    >
+      Veronica
+    </div>
+  </div>
+  <div>
+    <Link
+      className="collection__button"
+      to="/collections/4354"
+    >
+      View Collection
+    </Link>
+  </div>
+  <div>
+    <br />
+    <LikeButton
+      id={4354}
+      likes={
+        Array [
+          "5ef2b8c3d5973033a191aea2",
+          "5ef3f1798a8800471b987bbe",
+          "5ef7840ba4aca16282b26299",
+        ]
+      }
+      loggedInUser="Sarge"
+    />
+    <SaveButton
+      id={4354}
+      loggedInUser="Sarge"
+    />
+  </div>
+</div>
+`;

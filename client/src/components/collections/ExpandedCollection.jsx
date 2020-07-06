@@ -7,27 +7,28 @@ import LikeButton from './LikeButton';
 import SaveButton from './SaveButton';
 
 const ExpandedCollection = ({ loggedInUser }) => {
-  const [collection, setCollection] = useState([]);
-
+  // console.log('Invoked ExpandedCollection', loggedInUser);
+  const [collection, setCollection] = useState({ likes: [] });
   const { id } = useParams();
 
+  // console.log('useState collection', collection);
+  // console.log('useParams id', id);
+
   useEffect(() => {
+    // console.log('Fetching /api/collections for', id);
     fetch(`/api/collections/${id}`)
       .then((res) => res.json())
       .then((result) => {
+        console.log(result);
         setCollection(result);
       });
   }, []);
 
+  // console.log('useEffect collection', collection);
   return (
-
-    <div key={collection._id} className="collection-div">
-      <h1>
-        {collection.title}
-      </h1>
-      <h3>
-        {collection.description}
-      </h3>
+    <div className="collection-div">
+      <h1>{collection.title}</h1>
+      <h3>{collection.description}</h3>
 
       <div className="creator">
         <div className="creator__label">Creator:</div>
@@ -36,20 +37,20 @@ const ExpandedCollection = ({ loggedInUser }) => {
 
       {collection.links && (
         <div className="links">
-          {collection.links.map(
-            (link) => (
-              <div className="links__item" key={link}>
-                <a href={link} target="_blank" rel="noreferrer">{link}</a>
-              </div>
-            ),
-          )}
+          {collection.links.map((link) => (
+            <div className="links__item" key={link}>
+              <a href={link} target="_blank" rel="noreferrer">
+                {link}
+              </a>
+            </div>
+          ))}
         </div>
       )}
 
       {loggedInUser ? (
         <div>
           <br />
-          <LikeButton loggedInUser={loggedInUser} id={id} />
+          <LikeButton loggedInUser={loggedInUser} likes={collection.likes} id={id} />
           <SaveButton loggedInUser={loggedInUser} id={id} />
         </div>
       ) : (
@@ -61,7 +62,6 @@ const ExpandedCollection = ({ loggedInUser }) => {
         </div>
       )}
     </div>
-
   );
 };
 

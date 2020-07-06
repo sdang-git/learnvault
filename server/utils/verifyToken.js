@@ -1,15 +1,14 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'secret';
-
 const verifyToken = (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
-    return res.status(401).send('Unauthorized: No token provided');
+    res.error = 'Unauthorized: No token provided';
+    return res.status(401).send(res.error);
   }
 
-  return jwt.verify(token, secret, (err, decoded) => {
+  return jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).send('Unauthorized: Invalid token');
     }
