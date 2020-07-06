@@ -16,7 +16,9 @@ describe('React unit tests', () => {
     };
 
     let consoleOutput = '';
-    const mockConsole = jest.fn((output) => consoleOutput += output);
+    const mockConsole = jest.fn((output) => {
+      consoleOutput += output;
+    });
     console.log = mockConsole;
     console.error = mockConsole;
 
@@ -30,8 +32,6 @@ describe('React unit tests', () => {
 
     beforeAll(() => {
       wrapper = shallow(<LikeButton loggedInUser={props.loggedInUser} likes={props.likes} id={props.id} />);
-      // console.log('wrapper.html', wrapper.html());
-      // console.log('wrapper.text', wrapper.text());
     });
 
     it('Renders a <span> tag with the label "Like Collection"', () => {

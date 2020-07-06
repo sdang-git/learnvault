@@ -76,58 +76,100 @@ describe('AddCollection tests', () => {
   });
 
   it('invokes onChange handler for all input fields and updates each corresponding state', () => {
-    const author = wrapper.find('input').at(0);
+    const author = wrapper.find('input[name="author"]');
     // console.log('author.html', author.html());
-    author.instance().value = testFormData.author;
-    author.simulate('change');
+    // author.instance().value = testFormData.author;
+    const event = {
+      preventDefault() {},
+      target: { value: testFormData.author },
+    };
+    // author.simulate('change', event);
+    act(() => {
+      author.props().onChange(event);
+    });
+    // expect(setState).toHaveBeenCalled();
+    // expect(setState).toHaveBeenCalledTimes(1);
     // expect(setState).toHaveBeenCalledWith(testFormData.author);
+    // });
 
-    const title = wrapper.find('input').at(1);
+    const title = wrapper.find('input[name="title"]');
     // console.log('title.html', title.html());
-    title.instance().value = testFormData.title;
-    title.simulate('change');
+    // title.instance().value = testFormData.title;
+    // title.simulate('change');
+    event.target.value = testFormData.title;
+    act(() => {
+      title.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.title);
 
-    const description = wrapper.find('input').at(2);
+    const description = wrapper.find('input[name="description"]');
     // console.log('description.html', description.html());
-    description.instance().value = testFormData.description;
-    description.simulate('change');
+    // description.instance().value = testFormData.description;
+    // description.simulate('change');
+    event.target.value = testFormData.description;
+    act(() => {
+      description.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.description);
 
-    const hidden = wrapper.find('input').at(3);
+    const hidden = wrapper.find('input[name="hidden"]');
     // console.log('hidden.html', hidden.html());
-    hidden.instance().value = testFormData.hidden;
-    hidden.simulate('change');
+    // hidden.instance().value = testFormData.hidden;
+    // hidden.simulate('change');
+    event.target.value = testFormData.hidden;
+    act(() => {
+      hidden.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.hidden);
 
-    const contributors = wrapper.find('input').at(4);
+    const contributors = wrapper.find('input[name="contributors"]');
     console.log('contributors.html', contributors.html());
-    contributors.instance().value = testFormData.contributors;
-    contributors.simulate('change');
+    // contributors.instance().value = testFormData.contributors;
+    // contributors.simulate('change');
+    event.target.value = testFormData.contributors;
+    act(() => {
+      contributors.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.contributors);
 
-    const text = wrapper.find('input').at(5);
+    const text = wrapper.find('input[name="text"]');
     // console.log('text.html', text.html());
-    text.instance().value = testFormData.text;
-    text.simulate('change');
+    // text.instance().value = testFormData.text;
+    // text.simulate('change');
+    event.target.value = testFormData.text;
+    act(() => {
+      text.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.text);
 
-    const category = wrapper.find('input').at(6);
+    const category = wrapper.find('input[name="category"]');
     // console.log('category.html', category.html());
-    category.instance().value = testFormData.category;
-    category.simulate('change');
+    // category.instance().value = testFormData.category;
+    // category.simulate('change');
+    event.target.value = testFormData.category;
+    act(() => {
+      category.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.category);
 
-    const tags = wrapper.find('input').at(7);
+    const tags = wrapper.find('input[name="tags"]');
     // console.log('tags.html', tags.html());
-    tags.instance().value = testFormData.tags;
-    tags.simulate('change');
+    // tags.instance().value = testFormData.tags;
+    // tags.simulate('change');
+    event.target.value = testFormData.tags;
+    act(() => {
+      tags.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.tags);
 
-    const links = wrapper.find('input').at(8);
+    const links = wrapper.find('input[name="links"]');
     // console.log('links.html', links.html());
-    links.instance().value = testFormData.links;
-    links.simulate('change');
+    // links.instance().value = testFormData.links;
+    // links.simulate('change');
+    event.target.value = testFormData.links;
+    act(() => {
+      links.props().onChange(event);
+    });
     // expect(setState).toHaveBeenCalledWith(testFormData.links);
   });
 

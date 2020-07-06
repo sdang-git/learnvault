@@ -5,24 +5,15 @@
   "reporters": [
     "html",
     "clear-text",
-    "progress",
-    "dashboard"
+    "progress"
   ],
   "testRunner": "jest",
-  "transpilers": [
-    "babel",
-    "webpack"
-  ],
   "coverageAnalysis": "off",
   "babel": {
     "optionsFile": ".babelrc"
   },
+  "timeoutMS": 10000,
   "webpack": {
     "configFile": "webpack.config.js"
-  },
-  "dashboard": {
-    "project": "github.com/sdang-git/learnvault",
-    "version": "stryker",
-    "baseUrl": "https://dashboard.stryker-mutator.io"
   }
 }
