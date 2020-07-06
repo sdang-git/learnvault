@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import './AddCollection.css';
+import ErrorAlert from '../ErrorAlert';
 
 const AddCollection = () => {
   const linkField = { link: '' };
 
   const [redirect, setRedirect] = useState(false);
+  const [result, setResult] = useState(null);
   const [formData, setFormData] = useState({
     author: '',
     title: '',
@@ -79,13 +81,15 @@ const AddCollection = () => {
         }
       })
       .catch((err) => {
-        console.log('Error on add collection', err);
+        console.log(err);
+        setResult('error');
       });
   };
 
   return (
     <div>
       {redirect ? <Redirect to="/" /> : null}
+      {result === 'error' && <ErrorAlert setResult={setResult} />}
       <div className="addCollection">
         <h1>Add New Collection</h1>
         <form>
