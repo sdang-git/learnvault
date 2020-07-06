@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Collection from './Collection';
 
-const fetch = require('node-fetch');
-
 const AllCollections = ({ loggedInUser, userCollections }) => {
   // console.log('Invoked AllCollections', loggedInUser, userCollections);
   const [collections, setCollections] = useState([]);
