@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import Nav from './components/Nav';
 import Login from './components/Login';
@@ -18,6 +18,26 @@ import './App.css';
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState('');
   const [timerId, setTimerId] = useState('');
+
+  useEffect(() => {
+    fetch('/api/checkToken')
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        const error = new Error(res.statusText);
+        console.error('Error: fetch /api/checkToken did not return status 200', error);
+        // throw error;
+      })
+      .then((data) => {
+        console.log('Success: fetch /api/checkToken', data);
+        setLoggedInUser(data);
+      })
+      .catch((err) => {
+        console.error('Error: fetch /api/checkToken caught error', err);
+        setLoggedInUser('');
+      });
+  }, []);
 
   return (
     <Router>
