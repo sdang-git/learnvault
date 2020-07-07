@@ -59,7 +59,7 @@ const App = () => {
       <CssBaseline />
       <Router>
         <Nav loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} timerId={timerId} setTimerId={setTimerId} setDarkMode={setDarkMode} darkMode={darkMode} />
-        <main>
+        <main className="main">
           <Switch>
             <Route path="/register">
               <Register setLoggedInUser={setLoggedInUser} />
