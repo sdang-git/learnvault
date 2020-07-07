@@ -20,10 +20,11 @@ app.use(cookieParser());
 
 app.post('/api/register', userController.registerUser);
 app.post('/api/login', userController.loginUser);
+app.get('/api/logout', userController.logoutUser);
 // Used to check if the users token is valid
 // Allows us to protect routes on the client side
 app.get('/api/checkToken', [verifyToken], (req, res) => {
-  res.sendStatus(200);
+  res.status(200).send(res.locals.userId);
 });
 
 // Collection routes
