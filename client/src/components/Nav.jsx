@@ -11,7 +11,15 @@ const Nav = ({
   const history = useHistory();
 
   const logout = () => {
-    console.log('logging out');
+    // console.log('logging out');
+    fetch('/api/logout')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success /api/logout: ', data);
+      })
+      .catch((err) => {
+        console.log('Error /api/logout: ', err);
+      });
     clearTimeout(timerId);
     setTimerId('');
     setLoggedInUser('');
@@ -61,7 +69,7 @@ const Nav = ({
               </li>
               {/* Profile nav bar item not completed but functionality can be added */}
               {/* <li className="nav__item">
-                <Link to="/profile" className="nav__link">
+                <Link to="/profile" className="nav__link" id="nav-profile">
                   Profile
                 </Link>
               </li> */}

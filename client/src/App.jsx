@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -33,6 +33,26 @@ const App = () => {
     }),
     [darkMode],
   );
+
+  useEffect(() => {
+    fetch('/api/checkToken')
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        const error = new Error(res.statusText);
+        console.error('Error: fetch /api/checkToken did not return status 200', error);
+        // throw error;
+      })
+      .then((data) => {
+        console.log('Success: fetch /api/checkToken', data);
+        setLoggedInUser(data);
+      })
+      .catch((err) => {
+        console.error('Error: fetch /api/checkToken caught error', err);
+        setLoggedInUser('');
+      });
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
