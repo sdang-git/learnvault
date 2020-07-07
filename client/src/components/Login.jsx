@@ -1,22 +1,50 @@
 import React, { useState } from 'react';
+import clsx from 'clsx';
+import {
+  TextField, Button, InputLabel, InputAdornment, IconButton, OutlinedInput, FormControl, makeStyles,
+} from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+  textField: {
+    width: '25ch',
+  },
+}));
+
 const Login = ({ setLoggedInUser, setTimerId, timerId }) => {
+  const classes = useStyles();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
   const history = useHistory();
 
   const login = (e) => {
     e.preventDefault();
 
-    if (!email || !password) return;
+    if (!email || !password.password) return;
 
     fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password: password.password }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -38,23 +66,38 @@ const Login = ({ setLoggedInUser, setTimerId, timerId }) => {
       });
   };
 
+  const handleChange = (prop) => (event) => {
+    setPassword({ ...password, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setPassword({ ...password, showPassword: !password.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="login">
       <h1>Login</h1>
 
       <form>
-        <label htmlFor="login-email" className="input-label">
-          <div className="input-label__text">Email</div>
-          <input
+        {/* <label htmlFor="login-email" className="input-label"> */}
+        {/* <div className="input-label__text">Email</div> */}
+        {/* <input
             type="text"
             className="input-label__input"
             id="login-email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-          />
-        </label>
-
-        <label htmlFor="login-password" className="input-label">
+          /> */}
+        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <TextField id="outlined-required" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} value={email} />
+        </FormControl>
+        {/* </label> */}
+        <br />
+        {/* <label htmlFor="login-password" className="input-label">
           <div className="input-label__text">Password</div>
           <input
             type="password"
@@ -63,11 +106,34 @@ const Login = ({ setLoggedInUser, setTimerId, timerId }) => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-        </label>
-
-        <button type="submit" onClick={login}>
+        </label> */}
+        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={password.showPassword ? 'text' : 'password'}
+            value={password.password}
+            onChange={handleChange('password')}
+            endAdornment={(
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+              )}
+            labelWidth={70}
+          />
+        </FormControl>
+        <br />
+        {/* <button type="submit" onClick={login}>
           Login
-        </button>
+        </button> */}
+        <Button onClick={login} variant="contained" color="primary">Login</Button>
       </form>
     </div>
   );
