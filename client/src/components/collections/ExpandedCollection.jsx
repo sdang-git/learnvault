@@ -5,6 +5,7 @@ import './ExpandedCollection.css';
 
 import LikeButton from './LikeButton';
 import SaveButton from './SaveButton';
+import EditButton from './EditButton';
 
 const ExpandedCollection = ({ loggedInUser }) => {
   // console.log('Invoked ExpandedCollection', loggedInUser);
@@ -50,8 +51,19 @@ const ExpandedCollection = ({ loggedInUser }) => {
       {loggedInUser ? (
         <div>
           <br />
-          <LikeButton loggedInUser={loggedInUser} likes={collection.likes} id={id} />
+          <LikeButton
+            loggedInUser={loggedInUser}
+            likes={collection.likes}
+            id={id}
+          />
           <SaveButton loggedInUser={loggedInUser} id={id} />
+          {loggedInUser === collection.author && (
+            <EditButton
+              loggedInUser={loggedInUser}
+              author={collection.author}
+              id={id}
+            />
+          )}
         </div>
       ) : (
         <div>
