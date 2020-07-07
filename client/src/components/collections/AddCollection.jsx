@@ -4,13 +4,13 @@ import { Redirect } from 'react-router-dom';
 import './AddCollection.css';
 import ResultAlert from '../ResultAlert';
 
-const AddCollection = () => {
+const AddCollection = (props) => {
   const linkField = { link: '' };
 
   const [redirect, setRedirect] = useState(false);
   const [result, setResult] = useState(null);
   const [formData, setFormData] = useState({
-    author: '',
+    author: props.loggedInUser,
     title: '',
     description: '',
     hidden: false,
@@ -53,6 +53,7 @@ const AddCollection = () => {
     category,
     tags,
     links,
+    id,
   } = formData;
 
   const addCollection = (e) => {
@@ -94,7 +95,7 @@ const AddCollection = () => {
       <div className="addCollection">
         <h1>Add New Collection</h1>
         <form>
-          <label>
+          {/* <label>
             Author:
             <span className="label-note">(Required)</span>
             <input
@@ -104,7 +105,7 @@ const AddCollection = () => {
               onChange={(e) => updateForm(e)}
               value={author}
             />
-          </label>
+          </label> */}
           <br />
           <label>
             Title:

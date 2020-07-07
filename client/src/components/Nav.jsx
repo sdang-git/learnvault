@@ -3,9 +3,7 @@ import { Link, useHistory, BrowserRouter } from 'react-router-dom';
 
 import './Nav.css';
 
-const Nav = ({
-  loggedInUser, setLoggedInUser, timerId, setTimerId,
-}) => {
+const Nav = ({ loggedInUser, setLoggedInUser, timerId, setTimerId }) => {
   const history = useHistory();
 
   const logout = () => {
@@ -51,12 +49,29 @@ const Nav = ({
           {loggedInUser && (
             <>
               <li className="nav__item">
-                <Link to="/addcollection" className="nav__link" id="nav-addcollection">
+                <Link
+                  to="/addcollection"
+                  className="nav__link"
+                  id="nav-addcollection"
+                >
                   Add Collection
                 </Link>
               </li>
               <li className="nav__item">
-                <Link to="/savedcollections" className="nav__link" id="nav-savedcollections">
+                <Link
+                  to={`/collections/user/${loggedInUser}`}
+                  className="nav__link"
+                  id="nav-mycollections"
+                >
+                  My Collections
+                </Link>
+              </li>
+              <li className="nav__item">
+                <Link
+                  to="/savedcollections"
+                  className="nav__link"
+                  id="nav-savedcollections"
+                >
                   Saved Collections
                 </Link>
               </li>
@@ -67,7 +82,12 @@ const Nav = ({
                 </Link>
               </li> */}
               <li className="nav__item">
-                <button type="button" className="nav__link" onClick={logout} id="nav-logout">
+                <button
+                  type="button"
+                  className="nav__link"
+                  onClick={logout}
+                  id="nav-logout"
+                >
                   Logout
                 </button>
               </li>

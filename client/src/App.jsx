@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  BrowserRouter,
+} from 'react-router-dom';
 
 import Nav from './components/Nav';
 import Login from './components/Login';
@@ -26,7 +31,10 @@ const App = () => {
           return res.json();
         }
         const error = new Error(res.statusText);
-        console.error('Error: fetch /api/checkToken did not return status 200', error);
+        console.error(
+          'Error: fetch /api/checkToken did not return status 200',
+          error
+        );
         // throw error;
       })
       .then((data) => {
