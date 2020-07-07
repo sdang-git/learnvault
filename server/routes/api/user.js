@@ -4,9 +4,9 @@ const router = express.Router();
 const User = require('../../models/user');
 
 router.get('/profile', async (req, res) => {
-   const id = req.query.id;
+   const _id = req.query._id;
   try {
-    const collections = await User.findById(id);
+    const collections = await User.findById(_id);
     res.json(collections);
   } catch (err) {
     console.error(err.message);
