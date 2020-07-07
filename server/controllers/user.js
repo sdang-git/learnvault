@@ -7,6 +7,14 @@ const saltRounds = 10;
 const secret = process.env.JWT_SECRET;
 
 // ----------
+// Logout user
+// ----------
+
+exports.logoutUser = (req, res) => {
+  return res.clearCookie('token').send({ attempt: 'success' });
+};
+
+// ----------
 // Login user
 // ----------
 

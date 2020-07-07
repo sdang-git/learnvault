@@ -9,7 +9,15 @@ const Nav = ({
   const history = useHistory();
 
   const logout = () => {
-    console.log('logging out');
+    // console.log('logging out');
+    fetch('/api/logout')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success /api/logout: ', data);
+      })
+      .catch((err) => {
+        console.log('Error /api/logout: ', err);
+      });
     clearTimeout(timerId);
     setTimerId('');
     setLoggedInUser('');
@@ -21,7 +29,7 @@ const Nav = ({
       <nav className="nav">
         <ul className="nav__list">
           <li className="nav__item">
-            <Link to="/" className="nav__link">
+            <Link to="/" className="nav__link" id="nav-home">
               Home
             </Link>
           </li>
@@ -29,12 +37,12 @@ const Nav = ({
           {!loggedInUser && (
             <>
               <li className="nav__item">
-                <Link to="/login" className="nav__link">
+                <Link to="/login" className="nav__link" id="nav-login">
                   Login
                 </Link>
               </li>
               <li className="nav__item">
-                <Link to="/register" className="nav__link">
+                <Link to="/register" className="nav__link" id="nav-register">
                   Register
                 </Link>
               </li>
@@ -43,23 +51,22 @@ const Nav = ({
           {loggedInUser && (
             <>
               <li className="nav__item">
-                <Link to="/addcollection" className="nav__link">
+                <Link to="/addcollection" className="nav__link" id="nav-addcollection">
                   Add Collection
                 </Link>
               </li>
               <li className="nav__item">
-                <Link to="/savedcollections" className="nav__link">
+                <Link to="/savedcollections" className="nav__link" id="nav-savedcollections">
                   Saved Collections
                 </Link>
               </li>
-              {/* Profile nav bar item not completed but functionality can be added */}
               <li className="nav__item">
                 <Link to="/profile" className="nav__link">
                   Profile
                 </Link>
               </li>
               <li className="nav__item">
-                <button type="button" className="nav__link" onClick={logout}>
+                <button type="button" className="nav__link" onClick={logout} id="nav-logout">
                   Logout
                 </button>
               </li>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import Nav from './components/Nav';
 import Login from './components/Login';
@@ -19,9 +19,34 @@ const App = () => {
   const [loggedInUser, setLoggedInUser] = useState('');
   const [timerId, setTimerId] = useState('');
 
+  useEffect(() => {
+    fetch('/api/checkToken')
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        const error = new Error(res.statusText);
+        console.error('Error: fetch /api/checkToken did not return status 200', error);
+        // throw error;
+      })
+      .then((data) => {
+        console.log('Success: fetch /api/checkToken', data);
+        setLoggedInUser(data);
+      })
+      .catch((err) => {
+        console.error('Error: fetch /api/checkToken caught error', err);
+        setLoggedInUser('');
+      });
+  }, []);
+
   return (
     <Router>
-      <Nav loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} timerId={timerId} setTimerId={setTimerId} />
+      <Nav
+        loggedInUser={loggedInUser}
+        setLoggedInUser={setLoggedInUser}
+        timerId={timerId}
+        setTimerId={setTimerId}
+      />
       <main>
         <Switch>
           <Route path="/register">
@@ -29,12 +54,20 @@ const App = () => {
           </Route>
 
           <Route path="/login">
-            <Login setLoggedInUser={setLoggedInUser} setTimerId={setTimerId} timerId={timerId} />
+            <Login
+              setLoggedInUser={setLoggedInUser}
+              setTimerId={setTimerId}
+              timerId={timerId}
+            />
           </Route>
 
           <Route path="/profile">
             {/* To protect a route, simply wrap it with a WithAuth component */}
-            <WithAuth setLoggedInUser={setLoggedInUser} Component={Profile} loggedInUser={loggedInUser} />
+            <WithAuth
+              setLoggedInUser={setLoggedInUser}
+              Component={Profile}
+              loggedInUser={loggedInUser}
+            />
           </Route>
 
           <Route path="/collections/user/:userId">
@@ -46,12 +79,20 @@ const App = () => {
           </Route>
 
           <Route path="/savedcollections">
-            <WithAuth setLoggedInUser={setLoggedInUser} Component={SavedCollections} loggedInUser={loggedInUser} />
+            <WithAuth
+              setLoggedInUser={setLoggedInUser}
+              Component={SavedCollections}
+              loggedInUser={loggedInUser}
+            />
           </Route>
 
           <Route path="/addcollection">
             {/* <AddCollection loggedInUser={loggedInUser} /> */}
-            <WithAuth setLoggedInUser={setLoggedInUser} Component={AddCollection} loggedInUser={loggedInUser} />
+            <WithAuth
+              setLoggedInUser={setLoggedInUser}
+              Component={AddCollection}
+              loggedInUser={loggedInUser}
+            />
           </Route>
 
           <Route path="/" exact>
