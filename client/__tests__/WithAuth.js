@@ -66,7 +66,12 @@ describe('React unit tests', () => {
       await act(async () => {
         wrapper = mount(
           <RenderWithRouter>
-            <WithAuth Component={MockComponent} />
+            <WithAuth
+              Component={MockComponent}
+              loggedInUser={testProps.loggedInUser}
+              setLoggedInUser={testProps.setLoggedInUser}
+              id={testProps.id}
+            />
           </RenderWithRouter>,
         );
       });
@@ -89,7 +94,12 @@ describe('React unit tests', () => {
         await act(async () => {
           wrapper = mount(
             <RenderWithRouter>
-              <WithAuth Component={MockComponent} />
+              <WithAuth
+                Component={MockComponent}
+                loggedInUser={testProps.loggedInUser}
+                setLoggedInUser={testProps.setLoggedInUser}
+                id={testProps.id}
+              />
             </RenderWithRouter>,
           );
         });

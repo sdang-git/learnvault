@@ -17,11 +17,15 @@ const WithAuth = ({
       .then((res) => {
         if (res.status === 200) {
           setLoading(false);
-        } else {
-          const error = new Error(res.statusText);
-          console.error('Error: fetch /api/checkToken did not return status 200', error);
-          // throw error;
+          return res.json();
         }
+        const error = new Error(res.statusText);
+        console.error('Error: fetch /api/checkToken did not return status 200', error);
+        // throw error;
+      })
+      .then((data) => {
+        console.log('Success: fetch /api/checkToken', data);
+        setLoggedInUser(data);
       })
       .catch((err) => {
         console.error('Error: fetch /api/checkToken caught error', err);
