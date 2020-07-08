@@ -433,7 +433,7 @@ router.put('/tags/:id', async (req, res) => {
 
 // GET '/api/collections/user/:userId' - Get a collection by userId
 // @route   GET '/api/collections/user/:userId'
-// @desc    Get a collection by userI
+// @desc    Get a collection by userId
 // @access  Public
 
 router.get('/user/:id', async (req, res) => {

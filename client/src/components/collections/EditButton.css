@@ -1,9 +1,9 @@
-.button-like {
+.button-edit {
   margin-right: 10px;
   padding: 5px 10px;
 }
 
-.button-like:hover {
+.button-edit:hover {
   background: dodgerblue;
   color: white;
   cursor: pointer;
