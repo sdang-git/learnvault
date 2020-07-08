@@ -162,23 +162,23 @@ describe('AddCollection tests', () => {
 
     const addLink = wrapper.find('#add-link');
     act(() => {
-      addLink.props().onClick(event);
+      addLink.at(0).props().onClick(event);
     });
   });
 
   it('displays a button with the label Submit', () => {
     // expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('button[type="submit"]')).toHaveLength(1);
-    expect(wrapper.find('button[type="submit"]').html()).toMatch('Submit');
+    expect(wrapper.find('#submit-button').at(0)).toHaveLength(1);
+    expect(wrapper.find('#submit-button').at(0).html()).toMatch('Submit');
   });
 
   it('invokes the click handler for the Submit button', () => {
     const event = {
       preventDefault() {},
     };
-    const submitButton = wrapper.find('button[type="submit"]');
+    const submitButton = wrapper.find('#submit-button');
     act(() => {
-      submitButton.props().onClick(event);
+      submitButton.at(0).props().onClick(event);
     });
     expect(mockFetch).toHaveBeenCalledTimes(1);
   });
@@ -189,9 +189,9 @@ describe('AddCollection tests', () => {
     const event = {
       preventDefault() {},
     };
-    const submitButton = wrapper.find('button[type="submit"]');
+    const submitButton = wrapper.find('#submit-button');
     act(() => {
-      submitButton.props().onClick(event);
+      submitButton.at(0).props().onClick(event);
     });
     expect(mockBadFetch).toHaveBeenCalledTimes(1);
   });
