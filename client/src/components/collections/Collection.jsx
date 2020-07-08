@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Button, Link } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 import LikeButton from './LikeButton';
 import SaveButton from './SaveButton';
@@ -18,9 +19,10 @@ const Collection = ({
       <div className="creator__author">{author}</div>
     </div>
     <div>
-      <Link to={`/collections/${id}`} className="collection__button">
+      {/* className="collection__button" */}
+      <Button component={RouterLink} to={`/collections/${id}`} variant="contained" color="primary">
         View Collection
-      </Link>
+      </Button>
     </div>
     {loggedInUser ? (
       <div>
@@ -31,9 +33,9 @@ const Collection = ({
     ) : (
       <div>
         <br />
-        <Link to="/register">Register</Link>
+        <Link component={RouterLink} to="/register">Register</Link>
         &nbsp;or&nbsp;
-        <Link to="/login">Login</Link>
+        <Link component={RouterLink} to="/login">Login</Link>
         &nbsp;to save this collection
       </div>
     )}

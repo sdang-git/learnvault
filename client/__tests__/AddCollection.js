@@ -72,7 +72,7 @@ describe('AddCollection tests', () => {
     expect(wrapper.text()).toMatch('Author');
     expect(wrapper.text()).toMatch('Title');
     expect(wrapper.text()).toMatch('Description');
-    expect(wrapper.find('input')).toHaveLength(10);
+    expect(wrapper.find('input')).toHaveLength(9);
   });
 
   it('invokes onChange handler for all input fields and updates each corresponding state', () => {
@@ -116,6 +116,7 @@ describe('AddCollection tests', () => {
     // console.log('hidden.html', hidden.html());
     // hidden.instance().value = testFormData.hidden;
     // hidden.simulate('change');
+    event.target.name = 'hidden';
     event.target.value = testFormData.hidden;
     act(() => {
       hidden.props().onChange(event);
@@ -162,7 +163,7 @@ describe('AddCollection tests', () => {
     });
     // expect(setState).toHaveBeenCalledWith(testFormData.tags);
 
-    const links = wrapper.find('input[name="links"]');
+    const links = wrapper.find('input[name="link-0"]');
     // console.log('links.html', links.html());
     // links.instance().value = testFormData.links;
     // links.simulate('change');
@@ -171,23 +172,40 @@ describe('AddCollection tests', () => {
       links.props().onChange(event);
     });
     // expect(setState).toHaveBeenCalledWith(testFormData.links);
+
+    const addLink = wrapper.find('#add-link');
+    act(() => {
+      addLink.props().onClick(event);
+    });
   });
 
   it('displays a button with the label Submit', () => {
     // expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find('input[type="submit"]')).toHaveLength(1);
-    expect(wrapper.find('input[type="submit"]').html()).toMatch('Submit');
+    expect(wrapper.find('button[type="submit"]')).toHaveLength(1);
+    expect(wrapper.find('button[type="submit"]').html()).toMatch('Submit');
   });
 
   it('invokes the click handler for the Submit button', () => {
-    wrapper.find('input[type="submit"]').simulate('click');
+    const event = {
+      preventDefault() {},
+    };
+    const submitButton = wrapper.find('button[type="submit"]');
+    act(() => {
+      submitButton.props().onClick(event);
+    });
     expect(mockFetch).toHaveBeenCalledTimes(1);
   });
 
   it('invokes the click handler for the Submit button (negative test)', () => {
     const mockBadFetch = jest.fn(() => Promise.reject(new Error('should catch this error')));
     global.fetch = mockBadFetch;
-    wrapper.find('input[type="submit"]').simulate('click');
+    const event = {
+      preventDefault() {},
+    };
+    const submitButton = wrapper.find('button[type="submit"]');
+    act(() => {
+      submitButton.props().onClick(event);
+    });
     expect(mockBadFetch).toHaveBeenCalledTimes(1);
   });
 });

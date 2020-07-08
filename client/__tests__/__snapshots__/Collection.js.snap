@@ -28,12 +28,27 @@ exports[`Collection tests Collection renders correctly 1`] = `
     </div>
   </div>
   <div>
-    <Link
-      className="collection__button"
+    <WithStyles(ForwardRef(Button))
+      color="primary"
+      component={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "displayName": "Link",
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
       to="/collections/4354"
+      variant="contained"
     >
       View Collection
-    </Link>
+    </WithStyles(ForwardRef(Button))>
   </div>
   <div>
     <br />
