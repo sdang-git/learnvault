@@ -1,10 +1,32 @@
 import React, { useState } from 'react';
+import clsx from 'clsx';
+import {
+  TextField, Button, InputLabel, InputAdornment, IconButton, OutlinedInput, FormControl, makeStyles,
+} from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 import { useHistory } from 'react-router-dom';
 
 import './Register.css';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+  textField: {
+    width: '40ch',
+  },
+}));
+
 const register = ({ setLoggedInUser }) => {
+  const classes = useStyles();
   const history = useHistory();
 
   // -----------
@@ -13,8 +35,20 @@ const register = ({ setLoggedInUser }) => {
 
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [password, setPassword] = useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
+  const [passwordConfirm, setPasswordConfirm] = useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
 
   // --------------
   // Error messages
@@ -97,7 +131,7 @@ const register = ({ setLoggedInUser }) => {
   // -----------------------
 
   const validatePasswordMatch = () => {
-    if (password !== passwordConfirm) {
+    if (password.password !== passwordConfirm.password) {
       setErrorPasswordConfirm("Password fields don't match");
       containsErrors = true;
       setError(true);
@@ -113,7 +147,7 @@ const register = ({ setLoggedInUser }) => {
   // TODO: clear any tokens that might be lingering in the users cookies
 
   const sendUserData = async () => {
-    const userInfo = { email, username, password };
+    const userInfo = { email, username, password: password.password };
 
     const response = await fetch('/api/register', {
       method: 'POST',
@@ -172,6 +206,30 @@ const register = ({ setLoggedInUser }) => {
     sendUserData();
   };
 
+  const handlePasswordChange = (prop) => (event) => {
+    setPassword({ ...password, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setPassword({ ...password, showPassword: !password.showPassword });
+  };
+
+  const handlePasswordConfirmChange = (prop) => (event) => {
+    setPasswordConfirm({ ...passwordConfirm, [prop]: event.target.value });
+  };
+
+  const handleClickShowPasswordConfirm = () => {
+    setPasswordConfirm({ ...passwordConfirm, showPassword: !passwordConfirm.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleMouseDownPasswordConfirm = (event) => {
+    event.preventDefault();
+  };
+
   // ------
   // Render
   // ------
@@ -196,57 +254,61 @@ const register = ({ setLoggedInUser }) => {
       )}
 
       <form className="register-form">
-        <label htmlFor="register-email" className="input-label">
-          <div className="input-label__text">Email</div>
-          <input
-            type="text"
-            className="input-label__input"
-            id="register-email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <TextField id="outlined-required-email" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} value={email} />
+        </FormControl>
+        <br />
+        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <TextField id="outlined-required-username" label="Username" variant="outlined" onChange={(e) => setUsername(e.target.value)} value={username} />
+        </FormControl>
+        <br />
+        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={password.showPassword ? 'text' : 'password'}
+            value={password.password}
+            onChange={handlePasswordChange('password')}
+            endAdornment={(
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+              )}
+            labelWidth={70}
           />
-        </label>
-
-        <label htmlFor="register-username" className="input-label">
-          <div className="input-label__text">Username</div>
-          <div className="input-label__description">
-            Length 3-16 characters, numbers, letters, -, and _ allowed
-          </div>
-          <input
-            type="text"
-            className="input-label__input"
-            id="register-username"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
+        </FormControl>
+        <br />
+        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password-confirm">Confirm Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password-confirm"
+            type={passwordConfirm.showPassword ? 'text' : 'password'}
+            value={passwordConfirm.password}
+            onChange={handlePasswordConfirmChange('password')}
+            endAdornment={(
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPasswordConfirm}
+                  onMouseDown={handleMouseDownPasswordConfirm}
+                  edge="end"
+                >
+                  {passwordConfirm.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+              )}
+            labelWidth={135}
           />
-        </label>
-
-        <label htmlFor="register-password" className="input-label">
-          <div className="input-label__text">Password</div>
-          <div className="input-label__description">
-            Minimum length of 3 characters
-          </div>
-          <input
-            type="password"
-            className="input-label__input"
-            id="register-password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </label>
-
-        <label htmlFor="register-confirm-password" className="input-label">
-          <div className="input-label__text">Confirm Password</div>
-          <input
-            type="password"
-            className="input-label__input"
-            id="register-confirm-password"
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-            value={passwordConfirm}
-          />
-        </label>
-
-        <input type="submit" value="Register" onClick={submitForm} />
+        </FormControl>
+        <br />
+        <Button onClick={submitForm} variant="contained" color="primary">Submit</Button>
       </form>
     </div>
   );

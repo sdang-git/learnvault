@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: '25ch',
+    width: '40ch',
   },
 }));
 
@@ -81,32 +81,12 @@ const Login = ({ setLoggedInUser, setTimerId, timerId }) => {
   return (
     <div className="login">
       <h1>Login</h1>
-
       <form>
-        {/* <label htmlFor="login-email" className="input-label"> */}
-        {/* <div className="input-label__text">Email</div> */}
-        {/* <input
-            type="text"
-            className="input-label__input"
-            id="login-email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          /> */}
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <TextField id="outlined-required" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} value={email} />
         </FormControl>
         {/* </label> */}
         <br />
-        {/* <label htmlFor="login-password" className="input-label">
-          <div className="input-label__text">Password</div>
-          <input
-            type="password"
-            className="input-label__input"
-            id="login-password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </label> */}
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -130,9 +110,6 @@ const Login = ({ setLoggedInUser, setTimerId, timerId }) => {
           />
         </FormControl>
         <br />
-        {/* <button type="submit" onClick={login}>
-          Login
-        </button> */}
         <Button onClick={login} variant="contained" color="primary">Login</Button>
       </form>
     </div>

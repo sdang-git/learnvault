@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Link } from '@material-ui/core';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import {
   Link as RouterLink,
   useHistory,
@@ -14,17 +15,30 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import './Nav.css';
+// import './Nav.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  left: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  right: {
+    display: 'flex',
+    alignItems: 'center',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
+  },
+  links: {
+  },
+  link: {
+    margin: '0px 10px',
   },
 }));
 
@@ -43,10 +57,18 @@ const Nav = ({
     fetch('/api/logout')
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success /api/logout: ', data);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.log('Success /api/logout: ', data);
+        }
+        return data;
       })
       .catch((err) => {
-        console.log('Error /api/logout: ', err);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.log('Error /api/logout: ', err);
+        }
+        // throw error
       });
     clearTimeout(timerId);
     setTimerId('');
@@ -57,9 +79,9 @@ const Nav = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="fixed">
-        <Toolbar>
+    <AppBar position="fixed" color="default">
+      <Toolbar className={classes.root}>
+        <div className={classes.left}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -68,96 +90,99 @@ const Nav = ({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6">
             LearnVault
           </Typography>
+        </div>
+        <div className={classes.right}>
           <Link
             component={RouterLink}
             to="/"
-            color="textPrimary"
-            className={classes.title}
-            id="nav-home"
+            color="inherit"
+            className={classes.link}
+            variant="h6"
           >
             Home
           </Link>
           {!loggedInUser && (
-            <>
-              <Link
-                component={RouterLink}
-                to="/login"
-                color="textPrimary"
-                className={classes.title}
-                id="nav-login"
-              >
-                Login
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/register"
-                color="textPrimary"
-                className={classes.title}
-                id="nav-register"
-              >
-                Register
-              </Link>
-            </>
+          <>
+            <Link
+              component={RouterLink}
+              to="/login"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Login
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/register"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Register
+            </Link>
+          </>
           )}
           {loggedInUser && (
-            <>
-              <Link
-                component={RouterLink}
-                to="/addcollection"
-                color="textPrimary"
-                className={classes.title}
-                id="nav-addcollection"
-              >
-                Add Collection
-              </Link>
-              <Link
-                component={RouterLink}
-                to={`/collections/user/${loggedInUser}`}
-                color="textPrimary"
-                className={classes.title}
-                id="nav-mycollections"
-              >
-                My Collections
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/savedcollections"
-                color="textPrimary"
-                className={classes.title}
-                id="nav-savedcollections"
-              >
-                Saved Collections
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/profile"
-                id="nav-profile"
-                color="textPrimary"
-                className={classes.title}
-              >
-                Profile
-              </Link>
-              <Link
-                href="#logout"
-                onClick={logout}
-                color="textPrimary"
-                className={classes.title}
-                id="nav-logout"
-              >
-                Logout
-              </Link>
-            </>
+          <>
+            <Link
+              component={RouterLink}
+              to="/addcollection"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Add Collection
+            </Link>
+            <Link
+              component={RouterLink}
+              to={`/collections/user/${loggedInUser}`}
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              My Collections
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/savedcollections"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Saved Collections
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/profile"
+              id="nav-profile"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Profile
+            </Link>
+            <Link
+              href="#logout"
+              onClick={logout}
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Logout
+            </Link>
+          </>
           )}
-          <Button variant="text" onClick={() => setDarkMode(!darkMode)}>
-            {darkMode && <Brightness4Icon style={{ color: 'white' }} />}
-            {!darkMode && <Brightness4Icon style={{ color: 'black' }} />}
+          <Button aria-label="toggle dark mode" variant="text" onClick={() => setDarkMode(!darkMode)}>
+            {darkMode && <Brightness7Icon style={{ color: 'white' }} />}
+            {!darkMode && <Brightness4Icon style={{ color: 'white' }} />}
           </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 
