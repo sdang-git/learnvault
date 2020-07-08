@@ -125,12 +125,16 @@ const Nav = ({
               >
                 Saved Collections
               </Link>
-              {/* Profile nav bar item not completed but functionality can be added */}
-              {/* <li className="nav__item">
-                <Link to="/profile" className="nav__link" id="nav-profile" color="textPrimary">
-                  Profile
-                </Link>
-              </li> */}
+              <Link
+                component={RouterLink}
+                to="/profile"
+                className="nav__link"
+                id="nav-profile"
+                color="textPrimary"
+                classNamer={classes.title}
+              >
+                Profile
+              </Link>
               <Link
                 href="#logout"
                 onClick={logout}
