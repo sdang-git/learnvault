@@ -101,6 +101,7 @@ const Nav = ({
             color="inherit"
             className={classes.link}
             variant="h6"
+            id="nav-home"
           >
             Home
           </Link>
@@ -112,6 +113,7 @@ const Nav = ({
               color="inherit"
               className={classes.link}
               variant="h6"
+              id="nav-login"
             >
               Login
             </Link>
@@ -121,6 +123,7 @@ const Nav = ({
               color="inherit"
               className={classes.link}
               variant="h6"
+              id="nav-register"
             >
               Register
             </Link>
@@ -134,6 +137,7 @@ const Nav = ({
               color="inherit"
               className={classes.link}
               variant="h6"
+              id="nav-addcollection"
             >
               Add Collection
             </Link>
@@ -143,6 +147,7 @@ const Nav = ({
               color="inherit"
               className={classes.link}
               variant="h6"
+              id="nav-mycollections"
             >
               My Collections
             </Link>
@@ -152,6 +157,7 @@ const Nav = ({
               color="inherit"
               className={classes.link}
               variant="h6"
+              id="nav-savedcollections"
             >
               Saved Collections
             </Link>
@@ -171,6 +177,7 @@ const Nav = ({
               color="inherit"
               className={classes.link}
               variant="h6"
+              id="nav-logout"
             >
               Logout
             </Link>

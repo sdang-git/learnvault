@@ -185,14 +185,14 @@ const AddCollection = ({ loggedInUser }) => {
                 <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                   <TextField id={`outlined-required-link-${idx}`} name={link} label="Link" variant="outlined" onChange={(e) => updateForm(e)} />
                 </FormControl>
-                <IconButton color="primary" aria-label="add link" component="span" className={classes.margin} onClick={addLinkField}>
+                <IconButton color="primary" id="add-link" aria-label="add link" component="span" className={classes.margin} onClick={addLinkField}>
                   <AddBoxIcon size="small" />
                 </IconButton>
               </div>
             );
           })}
           <br />
-          <Button onClick={addCollection} variant="contained" color="primary">Submit</Button>
+          <Button onClick={addCollection} id="submit-button" variant="contained" color="primary">Submit</Button>
         </form>
       </div>
     </div>

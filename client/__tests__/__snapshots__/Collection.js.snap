@@ -305,6 +305,7 @@ exports[`Collection tests Collection renders correctly 1`] = `
                     className="far fa-thumbs-up"
                   />
                   <small>
+                     
                     3
                   </small>
                 </span>
