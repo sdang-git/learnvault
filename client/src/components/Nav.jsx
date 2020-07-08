@@ -131,7 +131,7 @@ const Nav = ({
                 className="nav__link"
                 id="nav-profile"
                 color="textPrimary"
-                classNamer={classes.title}
+                className={classes.title}
               >
                 Profile
               </Link>

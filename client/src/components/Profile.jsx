@@ -6,7 +6,7 @@ const RenderUser = (user) =>(<>
 </>);
 
 const RenderInfo = ({data}) =>(
-<>  
+<> 
   <div>
     {data.likesTitle !=''? <h4>likesTitle:{data.likesTitle}</h4>: null}
     {data.likesText !=''? <h4>likesText:{data.likesText}</h4>: null}
@@ -19,17 +19,15 @@ const RenderInfo = ({data}) =>(
     </div>
 </>);
 
-const Summary = ({data}) =>(
-
+const Summary1 = ({data}) =>(
   <>
-  {console.log('data s::',data.tags, Object.keys(data).map(item=>item) )}
-    <h2>Summary:</h2>
-    <div>you have liked {Object.keys(data).length} items</div>
-    <div>with {Object.keys(data).map(item=> data[item].tags)}</div>
+  {console.log('d', data)}
+    hi from summary
   </>
 );
 
 const Profile =  ( {loggedInUser} ) => {
+  console.log('Profile',loggedInUser );
 const [user, setUser]=useState({
   username:'',
   email:'',
@@ -56,7 +54,7 @@ const [data, setData] = useState([{
             username: result.username,
             email: result.email
           });
-          return
+          return user
         });
 
 //useEffect for RenderInfo
@@ -87,9 +85,10 @@ return (
   { loggedInUser ?
   <div>
      <RenderUser {...user} /> 
-     { 
+
+     {
        Object.keys(data).map((item, index) => {
-        return <RenderInfo 
+       <RenderInfo 
         key={index} 
         data={data[item]}/>
       })
