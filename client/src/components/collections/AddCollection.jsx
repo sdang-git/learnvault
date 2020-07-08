@@ -114,14 +114,20 @@ const AddCollection = ({ loggedInUser }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          console.log('AddCollection successful!');
+          if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+            console.log('AddCollection successful!');
+            console.log('result? ', result);
+          }
           setResult('success');
-          console.log('result? ', result);
           setTimeout(() => setRedirect(true), 2000);
         }
       })
       .catch((err) => {
-        console.log(err);
+        if (process.env.NODE_ENV === 'development'
+        || process.env.NODE_ENV === 'test') {
+          console.log(err);
+        }
         setResult('error');
       });
   };

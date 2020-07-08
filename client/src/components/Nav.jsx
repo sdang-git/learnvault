@@ -57,10 +57,18 @@ const Nav = ({
     fetch('/api/logout')
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success /api/logout: ', data);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.log('Success /api/logout: ', data);
+        }
+        return data;
       })
       .catch((err) => {
-        console.log('Error /api/logout: ', err);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.log('Error /api/logout: ', err);
+        }
+        // throw error
       });
     clearTimeout(timerId);
     setTimerId('');
@@ -168,7 +176,7 @@ const Nav = ({
             </Link>
           </>
           )}
-          <Button variant="text" onClick={() => setDarkMode(!darkMode)}>
+          <Button aria-label="toggle dark mode" variant="text" onClick={() => setDarkMode(!darkMode)}>
             {darkMode && <Brightness7Icon style={{ color: 'white' }} />}
             {!darkMode && <Brightness4Icon style={{ color: 'white' }} />}
           </Button>

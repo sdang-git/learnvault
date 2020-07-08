@@ -57,18 +57,27 @@ const App = () => {
           return res.json();
         }
         const error = new Error(res.statusText);
-        console.error(
-          'Error: fetch /api/checkToken did not return status 200',
-          error,
-        );
-        // throw error;
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.error(
+            'Error: fetch /api/checkToken did not return status 200',
+            error,
+          );
+          throw error;
+        }
       })
       .then((data) => {
-        console.log('Success: fetch /api/checkToken', data);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.log('Success: fetch /api/checkToken', data);
+        }
         setLoggedInUser(data);
       })
       .catch((err) => {
-        console.error('Error: fetch /api/checkToken caught error', err);
+        if (process.env.NODE_ENV === 'development'
+        || process.env.NODE_ENV === 'test') {
+          console.error('Error: fetch /api/checkToken caught error', err);
+        }
         setLoggedInUser('');
       });
   }, []);

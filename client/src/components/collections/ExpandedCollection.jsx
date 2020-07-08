@@ -22,7 +22,10 @@ const ExpandedCollection = ({ loggedInUser }) => {
     fetch(`/api/collections/${id}`)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.log(result);
+        }
         setCollection(result);
       });
   }, []);

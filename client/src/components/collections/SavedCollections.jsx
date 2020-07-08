@@ -33,7 +33,11 @@ const SavedCollections = ({ loggedInUser }) => {
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.error('Error:', error);
+        }
+        // throw error
       });
   }, []);
 

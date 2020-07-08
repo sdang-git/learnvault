@@ -15,10 +15,18 @@ const LikeButton = ({ id, loggedInUser, likes }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success:', data);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.log('Success:', data);
+        }
+        return data;
       })
       .catch((error) => {
-        console.error('Error:', error);
+        if (process.env.NODE_ENV === 'development'
+          || process.env.NODE_ENV === 'test') {
+          console.error('Error:', error);
+        }
+        // throw error
       });
   }
 
