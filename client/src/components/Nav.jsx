@@ -67,13 +67,9 @@ const Nav = ({
           {loggedInUser && (
             <>
               <Link component={RouterLink} to="/addcollection" color="textPrimary" className={classes.title}>Add Collection</Link>
-              <Link component={RouterLink} to="/savedcollections" color="textPrimary" className={classes.title}>Saved Collections</Link>
-              {/* Profile nav bar item not completed but functionality can be added */}
-              {/* <li className="nav__item">
-                <Link to="/profile" className="nav__link" id="nav-profile" color="textPrimary">
-                  Profile
-                </Link>
-              </li> */}
+              <Link component={RouterLink} to="/savedcollections" color="textPrimary" className={classes.title}>Saved Collections</Link>            
+              <Link component={RouterLink} to="/profile" className="nav__link" id="nav-profile" color="textPrimary" classNamer={classes.title}>Profile</Link>
+
               <Link href="#logout" onClick={logout} color="textPrimary" className={classes.title}>Logout</Link>
             </>
           )}

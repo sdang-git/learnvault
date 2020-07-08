@@ -29,6 +29,8 @@ app.get('/api/checkToken', [verifyToken], (req, res) => {
 
 // Collection routes
 app.use('/api/collections', require('./routes/api/collections'));
+// User routes
+app.use('/api/user', require('./routes/api/user'));
 
 // Let React handle all other routes
 app.get('*', (req, res) => {
