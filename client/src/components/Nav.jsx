@@ -1,10 +1,31 @@
 import React from 'react';
-import { Link, useHistory, BrowserRouter } from 'react-router-dom';
+import { Button, Link } from '@material-ui/core';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import { Link as RouterLink, useHistory, BrowserRouter } from 'react-router-dom';
+
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import './Nav.css';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 const Nav = ({
-  loggedInUser, setLoggedInUser, timerId, setTimerId,
+  loggedInUser, setLoggedInUser, timerId, setTimerId, setDarkMode, darkMode,
 }) => {
   const history = useHistory();
 
@@ -24,58 +45,49 @@ const Nav = ({
     history.push('/');
   };
 
-  return (
-    <header className="header">
-      <nav className="nav">
-        <ul className="nav__list">
-          <li className="nav__item">
-            <Link to="/" className="nav__link" id="nav-home">
-              Home
-            </Link>
-          </li>
+  const classes = useStyles();
 
+  return (
+    <div className={classes.root}>
+      <AppBar position="fixed">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            LearnVault
+          </Typography>
+          <Link component={RouterLink} to="/" color="textPrimary" className={classes.title}>Home</Link>
           {!loggedInUser && (
             <>
-              <li className="nav__item">
-                <Link to="/login" className="nav__link" id="nav-login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav__item">
-                <Link to="/register" className="nav__link" id="nav-register">
-                  Register
-                </Link>
-              </li>
+              <Link component={RouterLink} to="/login" color="textPrimary" className={classes.title}>Login</Link>
+              <Link component={RouterLink} to="/register" color="textPrimary" className={classes.title}>Register</Link>
             </>
           )}
           {loggedInUser && (
             <>
-              <li className="nav__item">
-                <Link to="/addcollection" className="nav__link" id="nav-addcollection">
-                  Add Collection
-                </Link>
-              </li>
-              <li className="nav__item">
-                <Link to="/savedcollections" className="nav__link" id="nav-savedcollections">
-                  Saved Collections
-                </Link>
-              </li>
+              <Link component={RouterLink} to="/addcollection" color="textPrimary" className={classes.title}>Add Collection</Link>
+              <Link component={RouterLink} to="/savedcollections" color="textPrimary" className={classes.title}>Saved Collections</Link>
               {/* Profile nav bar item not completed but functionality can be added */}
               {/* <li className="nav__item">
-                <Link to="/profile" className="nav__link" id="nav-profile">
+                <Link to="/profile" className="nav__link" id="nav-profile" color="textPrimary">
                   Profile
                 </Link>
               </li> */}
-              <li className="nav__item">
-                <button type="button" className="nav__link" onClick={logout} id="nav-logout">
-                  Logout
-                </button>
-              </li>
+              <Link href="#logout" onClick={logout} color="textPrimary" className={classes.title}>Logout</Link>
             </>
           )}
-        </ul>
-      </nav>
-    </header>
+          <Button variant="text" onClick={() => setDarkMode(!darkMode)}>
+            {darkMode && (
+              <Brightness4Icon style={{ color: 'white' }} />
+            )}
+            {!darkMode && (
+              <Brightness4Icon style={{ color: 'black' }} />
+            )}
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
