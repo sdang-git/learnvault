@@ -254,57 +254,14 @@ const register = ({ setLoggedInUser }) => {
       )}
 
       <form className="register-form">
-        {/* <label htmlFor="register-email" className="input-label">
-          <div className="input-label__text">Email</div>
-          <input
-            type="text"
-            className="input-label__input"
-            id="register-email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </label> */}
-
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <TextField id="outlined-required-email" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} value={email} />
         </FormControl>
-
-        {/* <label htmlFor="register-username" className="input-label">
-          <div className="input-label__text">Username</div>
-          <div className="input-label__description">
-            Length 3-16 characters, numbers, letters, -, and _ allowed
-          </div>
-          <input
-            type="text"
-            className="input-label__input"
-            id="register-username"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-          />
-        </label> */}
-
         <br />
-
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <TextField id="outlined-required-username" label="Username" variant="outlined" onChange={(e) => setUsername(e.target.value)} value={username} />
         </FormControl>
-
-        {/* <label htmlFor="register-password" className="input-label">
-          <div className="input-label__text">Password</div>
-          <div className="input-label__description">
-            Minimum length of 3 characters
-          </div>
-          <input
-            type="password"
-            className="input-label__input"
-            id="register-password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </label> */}
-
         <br />
-
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -327,20 +284,7 @@ const register = ({ setLoggedInUser }) => {
             labelWidth={70}
           />
         </FormControl>
-
-        {/* <label htmlFor="register-confirm-password" className="input-label">
-          <div className="input-label__text">Confirm Password</div>
-          <input
-            type="password"
-            className="input-label__input"
-            id="register-confirm-password"
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-            value={passwordConfirm}
-          />
-        </label> */}
-
         <br />
-
         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password-confirm">Confirm Password</InputLabel>
           <OutlinedInput
@@ -363,10 +307,7 @@ const register = ({ setLoggedInUser }) => {
             labelWidth={135}
           />
         </FormControl>
-
         <br />
-
-        {/* <input type="submit" value="Register" onClick={submitForm} /> */}
         <Button onClick={submitForm} variant="contained" color="primary">Submit</Button>
       </form>
     </div>
