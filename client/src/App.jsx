@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, BrowserRouter } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  BrowserRouter,
+} from 'react-router-dom';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -41,7 +46,10 @@ const App = () => {
           return res.json();
         }
         const error = new Error(res.statusText);
-        console.error('Error: fetch /api/checkToken did not return status 200', error);
+        console.error(
+          'Error: fetch /api/checkToken did not return status 200',
+          error
+        );
         // throw error;
       })
       .then((data) => {
