@@ -15,17 +15,30 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import './Nav.css';
+// import './Nav.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  left: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  right: {
+    display: 'flex',
+    alignItems: 'center',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
+  },
+  links: {
+  },
+  link: {
+    margin: '0px 10px',
   },
 }));
 
@@ -58,9 +71,9 @@ const Nav = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="fixed" color="default">
-        <Toolbar>
+    <AppBar position="fixed" color="default">
+      <Toolbar className={classes.root}>
+        <div className={classes.left}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -69,97 +82,99 @@ const Nav = ({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6">
             LearnVault
           </Typography>
+        </div>
+        <div className={classes.right}>
           <Link
             component={RouterLink}
             to="/"
             color="inherit"
-            className={classes.title}
+            className={classes.link}
             variant="h6"
           >
             Home
           </Link>
           {!loggedInUser && (
-            <>
-              <Link
-                component={RouterLink}
-                to="/login"
-                color="inherit"
-                className={classes.title}
-                variant="h6"
-              >
-                Login
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/register"
-                color="inherit"
-                className={classes.title}
-                variant="h6"
-              >
-                Register
-              </Link>
-            </>
+          <>
+            <Link
+              component={RouterLink}
+              to="/login"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Login
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/register"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Register
+            </Link>
+          </>
           )}
           {loggedInUser && (
-            <>
-              <Link
-                component={RouterLink}
-                to="/addcollection"
-                color="inherit"
-                className={classes.title}
-                variant="h6"
-              >
-                Add Collection
-              </Link>
-              <Link
-                component={RouterLink}
-                to={`/collections/user/${loggedInUser}`}
-                color="inherit"
-                className={classes.title}
-                variant="h6"
-              >
-                My Collections
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/savedcollections"
-                color="inherit"
-                className={classes.title}
-                variant="h6"
-              >
-                Saved Collections
-              </Link>
-              <Link
-                component={RouterLink}
-                to="/profile"
-                id="nav-profile"
-                color="inherit"
-                className={classes.title}
-                variant="h6"
-              >
-                Profile
-              </Link>
-              <Link
-                href="#logout"
-                onClick={logout}
-                color="inherit"
-                className={classes.title}
-                variant="h6"
-              >
-                Logout
-              </Link>
-            </>
+          <>
+            <Link
+              component={RouterLink}
+              to="/addcollection"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Add Collection
+            </Link>
+            <Link
+              component={RouterLink}
+              to={`/collections/user/${loggedInUser}`}
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              My Collections
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/savedcollections"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Saved Collections
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/profile"
+              id="nav-profile"
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Profile
+            </Link>
+            <Link
+              href="#logout"
+              onClick={logout}
+              color="inherit"
+              className={classes.link}
+              variant="h6"
+            >
+              Logout
+            </Link>
+          </>
           )}
           <Button variant="text" onClick={() => setDarkMode(!darkMode)}>
-            {darkMode && <Brightness4Icon style={{ color: 'white' }} />}
-            {!darkMode && <Brightness7Icon style={{ color: 'white' }} />}
+            {darkMode && <Brightness7Icon style={{ color: 'white' }} />}
+            {!darkMode && <Brightness4Icon style={{ color: 'white' }} />}
           </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 

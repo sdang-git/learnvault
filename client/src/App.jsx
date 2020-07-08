@@ -36,12 +36,15 @@ const App = () => {
         MuiAppBar: {
           colorDefault: {
             color: 'white',
-            backgroundColor: darkMode ? '#424242' : '#7986cb',
+            backgroundColor: darkMode ? '#424242' : '#1976d2',
           },
         },
       },
       palette: {
         type: darkMode ? 'dark' : 'light',
+        primary: {
+          main: darkMode ? '#90caf9' : '#1976d2',
+        },
       },
     }),
     [darkMode],

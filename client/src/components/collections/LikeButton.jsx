@@ -33,7 +33,7 @@ const LikeButton = ({ id, loggedInUser, likes }) => {
         tabIndex={0}
       >
         <i className="far fa-thumbs-up" />
-        <small>{likes.length}</small>
+        <small> {likes.length}</small>
       </span>
     </>
   );

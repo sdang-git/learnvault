@@ -1,5 +1,7 @@
+import { Button, Link } from '@material-ui/core';
+import { withTheme } from '@material-ui/core/styles';
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link as RouterLink } from 'react-router-dom';
 
 import './ExpandedCollection.css';
 
@@ -40,9 +42,10 @@ const ExpandedCollection = ({ loggedInUser }) => {
         <div className="links">
           {collection.links.map((link) => (
             <div className="links__item" key={link}>
-              <a href={link} target="_blank" rel="noreferrer">
+              {/* <a href={link} target="_blank" rel="noreferrer">
                 {link}
-              </a>
+              </a> */}
+              <Link href={link}>{link}</Link>
             </div>
           ))}
         </div>
@@ -67,9 +70,9 @@ const ExpandedCollection = ({ loggedInUser }) => {
         </div>
       ) : (
         <div>
-          <Link to="/register">Register</Link>
+          <Link component={RouterLink} to="/register">Register</Link>
           &nbsp;or&nbsp;
-          <Link to="/login">Login</Link>
+          <Link component={RouterLink} to="/login">Login</Link>
           &nbsp;to save this collection
         </div>
       )}
@@ -77,4 +80,4 @@ const ExpandedCollection = ({ loggedInUser }) => {
   );
 };
 
-export default ExpandedCollection;
+export default withTheme(ExpandedCollection);
