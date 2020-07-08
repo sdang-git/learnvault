@@ -81,10 +81,6 @@ const [data, setData] = useState([{
               return data;
   });
   }, []);
-
-
-
- 
 return (  
   <>
   <div className="profile"> 
