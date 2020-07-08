@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Link } from '@material-ui/core';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import {
   Link as RouterLink,
   useHistory,
@@ -58,7 +59,7 @@ const Nav = ({
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" color="default">
         <Toolbar>
           <IconButton
             edge="start"
@@ -74,8 +75,9 @@ const Nav = ({
           <Link
             component={RouterLink}
             to="/"
-            color="textPrimary"
+            color="inherit"
             className={classes.title}
+            variant="h6"
           >
             Home
           </Link>
@@ -84,16 +86,18 @@ const Nav = ({
               <Link
                 component={RouterLink}
                 to="/login"
-                color="textPrimary"
+                color="inherit"
                 className={classes.title}
+                variant="h6"
               >
                 Login
               </Link>
               <Link
                 component={RouterLink}
                 to="/register"
-                color="textPrimary"
+                color="inherit"
                 className={classes.title}
+                variant="h6"
               >
                 Register
               </Link>
@@ -104,42 +108,46 @@ const Nav = ({
               <Link
                 component={RouterLink}
                 to="/addcollection"
-                color="textPrimary"
+                color="inherit"
                 className={classes.title}
+                variant="h6"
               >
                 Add Collection
               </Link>
               <Link
                 component={RouterLink}
                 to={`/collections/user/${loggedInUser}`}
-                color="textPrimary"
+                color="inherit"
                 className={classes.title}
+                variant="h6"
               >
                 My Collections
               </Link>
               <Link
                 component={RouterLink}
                 to="/savedcollections"
-                color="textPrimary"
+                color="inherit"
                 className={classes.title}
+                variant="h6"
               >
                 Saved Collections
               </Link>
               <Link
                 component={RouterLink}
                 to="/profile"
-                className="nav__link"
                 id="nav-profile"
-                color="textPrimary"
-                classNamer={classes.title}
+                color="inherit"
+                className={classes.title}
+                variant="h6"
               >
                 Profile
               </Link>
               <Link
                 href="#logout"
                 onClick={logout}
-                color="textPrimary"
+                color="inherit"
                 className={classes.title}
+                variant="h6"
               >
                 Logout
               </Link>
@@ -147,7 +155,7 @@ const Nav = ({
           )}
           <Button variant="text" onClick={() => setDarkMode(!darkMode)}>
             {darkMode && <Brightness4Icon style={{ color: 'white' }} />}
-            {!darkMode && <Brightness4Icon style={{ color: 'black' }} />}
+            {!darkMode && <Brightness7Icon style={{ color: 'white' }} />}
           </Button>
         </Toolbar>
       </AppBar>

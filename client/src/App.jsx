@@ -28,10 +28,18 @@ const App = () => {
   const [loggedInUser, setLoggedInUser] = useState('');
   const [timerId, setTimerId] = useState('');
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   const theme = React.useMemo(
     () => createMuiTheme({
+      overrides: {
+        MuiAppBar: {
+          colorDefault: {
+            color: 'white',
+            backgroundColor: darkMode ? '#424242' : '#7986cb',
+          },
+        },
+      },
       palette: {
         type: darkMode ? 'dark' : 'light',
       },
@@ -48,7 +56,7 @@ const App = () => {
         const error = new Error(res.statusText);
         console.error(
           'Error: fetch /api/checkToken did not return status 200',
-          error
+          error,
         );
         // throw error;
       })
