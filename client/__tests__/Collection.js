@@ -33,6 +33,8 @@ describe('Collection tests', () => {
           likes={testProps.likes}
         />,
       );
+      console.log('wrapper.html', wrapper.html());
+      console.log('wrapper.text', wrapper.text());
     });
 
     it('renders correctly', () => {
