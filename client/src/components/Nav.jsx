@@ -111,6 +111,14 @@ const Nav = ({
               </Link>
               <Link
                 component={RouterLink}
+                to={`/collections/user/${loggedInUser}`}
+                color="textPrimary"
+                className={classes.title}
+              >
+                My Collections
+              </Link>
+              <Link
+                component={RouterLink}
                 to="/savedcollections"
                 color="textPrimary"
                 className={classes.title}
