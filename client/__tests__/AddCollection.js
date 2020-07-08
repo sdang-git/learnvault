@@ -68,35 +68,22 @@ describe('AddCollection tests', () => {
     console.log('wrapper.html', wrapper.html());
   });
 
-  it('displays a form with input fields for Author, Title, Description', () => {
-    expect(wrapper.text()).toMatch('Author');
+  it('displays a form with input fields for Title, Description', () => {
+    expect(wrapper.text()).toMatch('Add New Collection');
     expect(wrapper.text()).toMatch('Title');
     expect(wrapper.text()).toMatch('Description');
-    expect(wrapper.find('input')).toHaveLength(9);
+    expect(wrapper.find('input')).toHaveLength(8);
   });
 
   it('invokes onChange handler for all input fields and updates each corresponding state', () => {
-    const author = wrapper.find('input[name="author"]');
-    // console.log('author.html', author.html());
-    // author.instance().value = testFormData.author;
-    const event = {
-      preventDefault() {},
-      target: { value: testFormData.author },
-    };
-    // author.simulate('change', event);
-    act(() => {
-      author.props().onChange(event);
-    });
-    // expect(setState).toHaveBeenCalled();
-    // expect(setState).toHaveBeenCalledTimes(1);
-    // expect(setState).toHaveBeenCalledWith(testFormData.author);
-    // });
-
     const title = wrapper.find('input[name="title"]');
     // console.log('title.html', title.html());
     // title.instance().value = testFormData.title;
     // title.simulate('change');
-    event.target.value = testFormData.title;
+    const event = {
+      preventDefault() {},
+      target: { value: testFormData.title },
+    };
     act(() => {
       title.props().onChange(event);
     });
