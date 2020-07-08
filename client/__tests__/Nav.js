@@ -52,11 +52,11 @@ describe('Nav tests', () => {
     expect(wrapper.find('#nav-addcollection').at(0).text()).toMatch('Add Collection');
     expect(wrapper.find(Link).at(1).props().to).toBe('/addcollection');
     expect(wrapper.find('#nav-savedcollections').at(0).text()).toMatch('Saved Collections');
-    expect(wrapper.find(Link).at(2).props().to).toBe('/savedcollections');
+    expect(wrapper.find(Link).at(2).props().to).toBe(`/collections/user/${testProps.loggedInUser}`);
   });
 
-  it('Renders a <button> with the label "Logout"', () => {
-    expect(wrapper.find('button').text()).toMatch('Logout');
+  it('Renders a <Link> with the label "Logout"', () => {
+    expect(wrapper.find('#nav-logout').at(0).text()).toMatch('Logout');
   });
 
   it('Invokes the click handler for the Logout button (postive test)', () => {
@@ -65,7 +65,7 @@ describe('Nav tests', () => {
       json: () => ({ attempt: 'success' }),
     }));
     global.fetch = mockFetch;
-    wrapper.find('button').props().onClick({ key: 'Enter' });
+    wrapper.find('#nav-logout').at(0).props().onClick();
     expect(mockFetch).toHaveBeenCalled();
     expect(mockFetch.mock.calls.length).toBe(1);
     expect(mockSetLoggedInUser).toHaveBeenCalled();
@@ -75,7 +75,7 @@ describe('Nav tests', () => {
   it('Invokes the click handler for the Logout button (negative test)', () => {
     const mockFetch = jest.fn(() => Promise.reject(new Error('should catch this error')));
     global.fetch = mockFetch;
-    wrapper.find('button').props().onClick({ key: 'Enter' });
+    wrapper.find('#nav-logout').at(0).props().onClick();
     expect(mockFetch).toHaveBeenCalled();
     expect(mockFetch.mock.calls.length).toBe(1);
   });

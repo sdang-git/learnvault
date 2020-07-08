@@ -1,72 +1,337 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Collection tests Collection renders correctly 1`] = `
-<div
-  className="collection"
-  key="4354"
->
-  <h1
-    className="collection__title"
-  >
-    Collection
-  </h1>
-  <h3>
-    buncha stuff
-  </h3>
-  <div
-    className="creator"
-  >
-    <div
-      className="creator__label"
-    >
-      Creator:
-    </div>
-    <div
-      className="creator__author"
-    >
-      Veronica
-    </div>
-  </div>
-  <div>
-    <WithStyles(ForwardRef(Button))
-      color="primary"
-      component={
+<RenderWithRouter>
+  <MemoryRouter
+    initialEntries={
+      Array [
         Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "displayName": "Link",
-          "propTypes": Object {
-            "innerRef": [Function],
-            "onClick": [Function],
-            "replace": [Function],
-            "target": [Function],
-            "to": [Function],
+          "key": "testKey",
+          "pathname": "/",
+        },
+      ]
+    }
+  >
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "canGo": [Function],
+          "createHref": [Function],
+          "entries": Array [
+            Object {
+              "hash": "",
+              "key": "testKey",
+              "pathname": "/",
+              "search": "",
+            },
+          ],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "index": 0,
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "key": "testKey",
+            "pathname": "/",
+            "search": "",
           },
-          "render": [Function],
+          "push": [Function],
+          "replace": [Function],
         }
       }
-      to="/collections/4354"
-      variant="contained"
     >
-      View Collection
-    </WithStyles(ForwardRef(Button))>
-  </div>
-  <div>
-    <br />
-    <LikeButton
-      id={4354}
-      likes={
-        Array [
-          "5ef2b8c3d5973033a191aea2",
-          "5ef3f1798a8800471b987bbe",
-          "5ef7840ba4aca16282b26299",
-        ]
-      }
-      loggedInUser="Sarge"
-    />
-    <SaveButton
-      id={4354}
-      loggedInUser="Sarge"
-    />
-  </div>
-</div>
+      <Route
+        path="/"
+      >
+        <Collection
+          author="Veronica"
+          description="buncha stuff"
+          id="5eee5bac1e986de551d57488"
+          key="testKey"
+          likes={
+            Array [
+              "5ef2b8c3d5973033a191aea2",
+              "5ef3f1798a8800471b987bbe",
+              "5ef7840ba4aca16282b26299",
+            ]
+          }
+          loggedInUser="Sarge"
+          title="Collection"
+        >
+          <div
+            className="collection"
+            key="5eee5bac1e986de551d57488"
+          >
+            <h1
+              className="collection__title"
+            >
+              Collection
+            </h1>
+            <h3>
+              buncha stuff
+            </h3>
+            <div
+              className="creator"
+            >
+              <div
+                className="creator__label"
+              >
+                Creator:
+              </div>
+              <div
+                className="creator__author"
+              >
+                Veronica
+              </div>
+            </div>
+            <div>
+              <WithStyles(ForwardRef(Button))
+                color="primary"
+                component={
+                  Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "displayName": "Link",
+                    "propTypes": Object {
+                      "innerRef": [Function],
+                      "onClick": [Function],
+                      "replace": [Function],
+                      "target": [Function],
+                      "to": [Function],
+                    },
+                    "render": [Function],
+                  }
+                }
+                to="/collections/5eee5bac1e986de551d57488"
+                variant="contained"
+              >
+                <ForwardRef(Button)
+                  classes={
+                    Object {
+                      "colorInherit": "MuiButton-colorInherit",
+                      "contained": "MuiButton-contained",
+                      "containedPrimary": "MuiButton-containedPrimary",
+                      "containedSecondary": "MuiButton-containedSecondary",
+                      "containedSizeLarge": "MuiButton-containedSizeLarge",
+                      "containedSizeSmall": "MuiButton-containedSizeSmall",
+                      "disableElevation": "MuiButton-disableElevation",
+                      "disabled": "Mui-disabled",
+                      "endIcon": "MuiButton-endIcon",
+                      "focusVisible": "Mui-focusVisible",
+                      "fullWidth": "MuiButton-fullWidth",
+                      "iconSizeLarge": "MuiButton-iconSizeLarge",
+                      "iconSizeMedium": "MuiButton-iconSizeMedium",
+                      "iconSizeSmall": "MuiButton-iconSizeSmall",
+                      "label": "MuiButton-label",
+                      "outlined": "MuiButton-outlined",
+                      "outlinedPrimary": "MuiButton-outlinedPrimary",
+                      "outlinedSecondary": "MuiButton-outlinedSecondary",
+                      "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
+                      "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
+                      "root": "MuiButton-root",
+                      "sizeLarge": "MuiButton-sizeLarge",
+                      "sizeSmall": "MuiButton-sizeSmall",
+                      "startIcon": "MuiButton-startIcon",
+                      "text": "MuiButton-text",
+                      "textPrimary": "MuiButton-textPrimary",
+                      "textSecondary": "MuiButton-textSecondary",
+                      "textSizeLarge": "MuiButton-textSizeLarge",
+                      "textSizeSmall": "MuiButton-textSizeSmall",
+                    }
+                  }
+                  color="primary"
+                  component={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "displayName": "Link",
+                      "propTypes": Object {
+                        "innerRef": [Function],
+                        "onClick": [Function],
+                        "replace": [Function],
+                        "target": [Function],
+                        "to": [Function],
+                      },
+                      "render": [Function],
+                    }
+                  }
+                  to="/collections/5eee5bac1e986de551d57488"
+                  variant="contained"
+                >
+                  <WithStyles(ForwardRef(ButtonBase))
+                    className="MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+                    component={
+                      Object {
+                        "$$typeof": Symbol(react.forward_ref),
+                        "displayName": "Link",
+                        "propTypes": Object {
+                          "innerRef": [Function],
+                          "onClick": [Function],
+                          "replace": [Function],
+                          "target": [Function],
+                          "to": [Function],
+                        },
+                        "render": [Function],
+                      }
+                    }
+                    disabled={false}
+                    focusRipple={true}
+                    focusVisibleClassName="Mui-focusVisible"
+                    to="/collections/5eee5bac1e986de551d57488"
+                    type="button"
+                  >
+                    <ForwardRef(ButtonBase)
+                      className="MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+                      classes={
+                        Object {
+                          "disabled": "Mui-disabled",
+                          "focusVisible": "Mui-focusVisible",
+                          "root": "MuiButtonBase-root",
+                        }
+                      }
+                      component={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "displayName": "Link",
+                          "propTypes": Object {
+                            "innerRef": [Function],
+                            "onClick": [Function],
+                            "replace": [Function],
+                            "target": [Function],
+                            "to": [Function],
+                          },
+                          "render": [Function],
+                        }
+                      }
+                      disabled={false}
+                      focusRipple={true}
+                      focusVisibleClassName="Mui-focusVisible"
+                      to="/collections/5eee5bac1e986de551d57488"
+                      type="button"
+                    >
+                      <Link
+                        aria-disabled={false}
+                        className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+                        onBlur={[Function]}
+                        onDragLeave={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
+                        onKeyUp={[Function]}
+                        onMouseDown={[Function]}
+                        onMouseLeave={[Function]}
+                        onMouseUp={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchMove={[Function]}
+                        onTouchStart={[Function]}
+                        role="button"
+                        tabIndex={0}
+                        to="/collections/5eee5bac1e986de551d57488"
+                      >
+                        <LinkAnchor
+                          aria-disabled={false}
+                          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+                          href="/collections/5eee5bac1e986de551d57488"
+                          navigate={[Function]}
+                          onBlur={[Function]}
+                          onDragLeave={[Function]}
+                          onFocus={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseLeave={[Function]}
+                          onMouseUp={[Function]}
+                          onTouchEnd={[Function]}
+                          onTouchMove={[Function]}
+                          onTouchStart={[Function]}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <a
+                            aria-disabled={false}
+                            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+                            href="/collections/5eee5bac1e986de551d57488"
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onDragLeave={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            onKeyUp={[Function]}
+                            onMouseDown={[Function]}
+                            onMouseLeave={[Function]}
+                            onMouseUp={[Function]}
+                            onTouchEnd={[Function]}
+                            onTouchMove={[Function]}
+                            onTouchStart={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <span
+                              className="MuiButton-label"
+                            >
+                              View Collection
+                            </span>
+                          </a>
+                        </LinkAnchor>
+                      </Link>
+                    </ForwardRef(ButtonBase)>
+                  </WithStyles(ForwardRef(ButtonBase))>
+                </ForwardRef(Button)>
+              </WithStyles(ForwardRef(Button))>
+            </div>
+            <div>
+              <br />
+              <LikeButton
+                id="5eee5bac1e986de551d57488"
+                likes={
+                  Array [
+                    "5ef2b8c3d5973033a191aea2",
+                    "5ef3f1798a8800471b987bbe",
+                    "5ef7840ba4aca16282b26299",
+                  ]
+                }
+                loggedInUser="Sarge"
+              >
+                <span
+                  className="button-like"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
+                  type="button"
+                >
+                  <i
+                    className="far fa-thumbs-up"
+                  />
+                  <small>
+                    3
+                  </small>
+                </span>
+              </LikeButton>
+              <SaveButton
+                id="5eee5bac1e986de551d57488"
+                loggedInUser="Sarge"
+              >
+                <span
+                  className="button-like"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
+                  type="button"
+                >
+                  <i
+                    className="far fa-star"
+                  />
+                    Save Collection
+                </span>
+              </SaveButton>
+            </div>
+          </div>
+        </Collection>
+      </Route>
+    </Router>
+  </MemoryRouter>
+</RenderWithRouter>
 `;

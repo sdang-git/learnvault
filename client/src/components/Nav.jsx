@@ -76,6 +76,7 @@ const Nav = ({
             to="/"
             color="textPrimary"
             className={classes.title}
+            id="nav-home"
           >
             Home
           </Link>
@@ -86,6 +87,7 @@ const Nav = ({
                 to="/login"
                 color="textPrimary"
                 className={classes.title}
+                id="nav-login"
               >
                 Login
               </Link>
@@ -94,6 +96,7 @@ const Nav = ({
                 to="/register"
                 color="textPrimary"
                 className={classes.title}
+                id="nav-register"
               >
                 Register
               </Link>
@@ -106,6 +109,7 @@ const Nav = ({
                 to="/addcollection"
                 color="textPrimary"
                 className={classes.title}
+                id="nav-addcollection"
               >
                 Add Collection
               </Link>
@@ -114,6 +118,7 @@ const Nav = ({
                 to={`/collections/user/${loggedInUser}`}
                 color="textPrimary"
                 className={classes.title}
+                id="nav-mycollections"
               >
                 My Collections
               </Link>
@@ -122,16 +127,16 @@ const Nav = ({
                 to="/savedcollections"
                 color="textPrimary"
                 className={classes.title}
+                id="nav-savedcollections"
               >
                 Saved Collections
               </Link>
               <Link
                 component={RouterLink}
                 to="/profile"
-                className="nav__link"
                 id="nav-profile"
                 color="textPrimary"
-                classNamer={classes.title}
+                className={classes.title}
               >
                 Profile
               </Link>
@@ -140,6 +145,7 @@ const Nav = ({
                 onClick={logout}
                 color="textPrimary"
                 className={classes.title}
+                id="nav-logout"
               >
                 Logout
               </Link>
